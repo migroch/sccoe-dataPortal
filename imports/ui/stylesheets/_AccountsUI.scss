@@ -1,0 +1,12 @@
+//AccountsUI.scss
+//AccountsUI component stylesheet
+
+#at-btn{
+  @extend .btn;
+  @extend .btn-primary;
+}
+
+.at-title{
+  display: none;
+}
+

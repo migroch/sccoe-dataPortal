@@ -1,0 +1,4 @@
+// popper.js
+// import popper
+import Popper from '@popperjs/core';
+window.Popper = Popper;

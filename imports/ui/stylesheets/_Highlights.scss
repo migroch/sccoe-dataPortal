@@ -1,0 +1,15 @@
+// _Highlights.scss
+// Highlights component stylesheet
+
+.carousel-indicators{
+  opacity: 0.75;
+  .active{
+    background-color:  $link-active-color !important;
+  }
+}
+
+.play-pause{
+  @extend .carousel-indicators;
+  height: 25px;
+  margin-bottom:1.8vh;
+}
