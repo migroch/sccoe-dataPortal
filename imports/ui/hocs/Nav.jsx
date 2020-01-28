@@ -105,12 +105,12 @@ class Nav extends Component {
 	if(['Highlights', 'About', 'Visualizations'].includes(item.key)){
 	  Link = (<a href={"#"+item.key} id={item.key+'Link'} className={"nav-link "+active}  onClick={this.handleLinkClick}>{item.title}</a>)
 	} else {
-	  Link = (<button type="button" href={"#"+item.key} id={item.key+'Link'} className={"nav-link btn "+active}  onClick={this.handleLinkClick} data-toggle="tooltip" data-placement="right" title="Coming soon!">{item.title}</button>)
+	  Link = (<a type="button" href={"#"+item.key} id={item.key+'Link'} className={"nav-link "+active}  onClick={this.handleLinkClick} data-toggle="tooltip" data-placement="right" title="Coming soon!">{item.title}</a>)
 	}
 	return(
 	  <li key={index} className="nav-item">
 	    {Link}
-	    <div id={item.key+"SubMenu"} className={"submenu d-sm-none d-md-none d-lg-inline-flex bg-transparent "+invisible} style={styles.subMenus}>
+	    <div id={item.key+"SubMenu"} className={"submenu d-none d-lg-inline-flex bg-transparent "+invisible} style={styles.subMenus}>
 	      {this.makeSubMenu(item)}
 	    </div>
 	  </li>
@@ -129,7 +129,7 @@ class Nav extends Component {
 	  );
 	} else {
 	  return(
-	    <a  href="#" key={index} id={item.key+"Link"} className={"dropdown-item"} data-vizkey={item.key} onClick={this.handleSubLinkClick}>{item.short_title}</a>
+	    <a  href="#" key={index} id={item.key+"Link"} className="dropdown-item" data-vizkey={item.key} onClick={this.handleSubLinkClick}>{item.short_title}</a>
 	  );
 	}
       })  
@@ -157,6 +157,7 @@ class Nav extends Component {
     $('.submenu').addClass('invisible');
     $(target).addClass('active');
     $(target).siblings().removeClass('invisible');
+    window.dispatchEvent(new Event('resize'));
   }
 
   activateScrollSpy(){
@@ -223,8 +224,11 @@ class Nav extends Component {
     window.addEventListener('resize',()=>{
       $('.submenu').each((index, submenu) => {
 	if( $(submenu).siblings().hasClass('active') ){
-	  let left = $(submenu).position().left;
+	  let left = $(submenu).offset().left;
 	  let right = left + $(submenu).width();
+	  console.log(submenu);
+	  console.log(right);
+	  console.log(window.innerWidth-100);
 	  if (right > window.innerWidth-100) {
 	    $(submenu).addClass('invisible'); 
 	  } else {
