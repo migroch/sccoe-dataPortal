@@ -18,6 +18,7 @@ class Visualizations extends Component {
       height: window.innerHeight - $('.navbar').outerHeight(),
     };
 
+    this.makeCategoryList = this.makeCategoryList.bind(this);
     this.makeVizList = this.makeVizList.bind(this);
     this.makeVizModal = this.makeVizModal.bind(this);
     this.openViz = this.openViz.bind(this);
@@ -43,15 +44,28 @@ class Visualizations extends Component {
       )
     }else{
       return (
-	<div id="Visualizations" className="scrollspy container-fluid pt-3" style={containerStyle}>
-	  <div className="container-fluid text-center bg-light pb-1"><h2 className="m-auto text-primary">Available Charts and Dashboards</h2></div>
-	  <div className="row align-items-start">
-	    {this.makeVizList(visualizations)}
-	  </div>
+	<div id="Visualizations" className="scrollspy container-fluid pt-1" style={containerStyle}>
+	  <div className="container-fluid text-center bg-light pb-1"><h2 className="m-auto text-primary">Charts and Dashboards</h2></div>
+	  {this.makeCategoryList(visualizations)}
 	  {this.makeVizModal(this.state.selectedViz)}
 	</div>
       );
     }
+  }
+
+  makeCategoryList(visualizations){
+    return(
+      visualizations.map((category, index) => {
+	return(
+	  <div id={category.category_key} key={index} className="pt-1 scrollspy text-center">
+	    <h5 className="">{category.category_title}</h5>
+	    <div className="row justify-content-center p-1">
+	      {this.makeVizList(category.vizs)}
+	    </div>
+	  </div>
+	  )
+      })
+    )
   }
 
   makeVizList(visualizations){
@@ -76,7 +90,11 @@ class Visualizations extends Component {
       vizKey = $(target).data('vizkey');
       $("#"+vizKey+"Button").click();
     }
-    let visualization = this.props.visualizations.find((viz) => viz.key==vizKey);
+    let visualization = ""
+    this.props.visualizations.forEach((category) =>{
+      let viz = category.vizs.find((viz)=>viz.key==vizKey);
+      if (viz) visualization = viz;
+    } );
     this.setState({selectedViz: visualization});
    }
 
@@ -130,8 +148,8 @@ class Visualizations extends Component {
 
   componentDidUpdate(){
     $("#vizModal" ).on('hide.bs.modal', this.closeViz);
-    let openViz = this.openViz;
-    $('#VisualizationsSubMenu').children().each((index, link)=>{ $(link).on("click", openViz) });
+    //let openViz = this.openViz;
+    //$('#VisualizationsSubMenu').children().each((index, link)=>{ $(link).on("click", openViz) });
   }
   
   componentWillUnmount() {

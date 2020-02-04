@@ -3,6 +3,11 @@ import ReactDOM from 'react-dom';
 import { Template } from 'meteor/templating';
 import { Blaze } from 'meteor/blaze';
 
+const logoStyle = {
+  width:'8em',
+  height: 'auto'
+}
+
 export default class AccountsUIWrapper extends Component {
   componentDidMount() {
     // Use Meteor Blaze to render login form
@@ -25,6 +30,9 @@ export default class AccountsUIWrapper extends Component {
               <button  type="button"  id="closeLoginModal" className="close" data-dismiss="modal" aria-label="Close">
 		<span aria-hidden="true">&times;</span>
               </button>
+	    </div>
+	    <div className="d-flex justify-content-center">
+	      <img className="rounded-circle mt-4" style={logoStyle} alt="Santa Cruz COE Logo" src="SCCOE_Logo_Color.png"/>
 	    </div>
 	    <div className="modal-body">
               <span ref="container" />

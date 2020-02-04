@@ -72,7 +72,10 @@ class HighLights extends Component {
       )
     }else{
       return (
-	<div id="Highlights" className="scrollspy container-fluid px-0 pt-0" style={carouselStyle}>
+	<div id="Highlights" className="scrollspy container-fluid px-0 pt-1" style={carouselStyle}>
+
+	  {/* <div className="container-fluid text-center bg-light pb-1"><h2 className="m-auto text-primary">Highlights</h2></div> */}
+	  
 	  <div id="HighlightsCarousel" className="carousel slide ml-auto mr-auto" data-ride="carousel" data-intervail="15000" style={carouselStyle}>
 
 	    {/* Indicators */}

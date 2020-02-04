@@ -7,8 +7,8 @@ import About  from '../reusable/About.jsx';
 const App = () => (
   <div>
     <Nav />
-    <HighLights />
     <About/>
+    <HighLights />
     <Visualizations />
   </div>
 );

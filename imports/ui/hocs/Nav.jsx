@@ -42,6 +42,7 @@ class Nav extends Component {
     this.handleLinkClick = this.handleLinkClick.bind(this);
     this.scrollSpy = this.scrollSpy.bind(this);
     this.activateScrollSpy = this.activateScrollSpy.bind(this);
+    this.makeSubMenu = this.makeSubMenu.bind(this);
   }
   
   render() {
@@ -82,9 +83,7 @@ class Nav extends Component {
 	      
 	      {/*Right Menu*/}
 	      <ul className="navbar-nav ml-auto ">
-		<li className="nav-item">
-		  {signIO}
-		</li>
+		{signIO}
 	      </ul>
 	    </div>
 	  </nav>
@@ -120,16 +119,17 @@ class Nav extends Component {
 
   makeSubMenu(menu_item){
     let submenu_items = menu_item.submenu_items;
+
     return(
       submenu_items.map( (item, index) =>{
 	let active = (index == 0) ? 'active' : ''
 	if (menu_item.key == 'Highlights'){
 	  return(
-	    <a  href="#" key={index} id={item+"Link"} className={"dropdown-item "+active} data-target="#HighlightsCarousel" data-slide-to={index}>{item}</a>
+	    <a  href='#' key={index} id={item+"Link"} className={"dropdown-item "+active} data-target="#HighlightsCarousel" data-slide-to={index}>{item}</a>
 	  );
 	} else {
 	  return(
-	    <a  href="#" key={index} id={item.key+"Link"} className="dropdown-item" data-vizkey={item.key} onClick={this.handleSubLinkClick}>{item.short_title}</a>
+	    <a  href={"#"+item.key} key={index} id={item.key+"Link"} className={"dropdown-item sublink "+active} data-vizkey={item.key} onClick={this.handleLinkClick}>{item.short_title}</a>
 	  );
 	}
       })  
@@ -142,13 +142,19 @@ class Nav extends Component {
     let offsetTop =  offset.top-$(".navbar").outerHeight();
     $('html, body').animate({
       scrollTop: offsetTop,
-      scrollLeft: offset.left,
+      //scrollLeft: offset.left,
     }, 700);
-    this.setActiveLink(target);
+    if ($(target).hasClass('sublink')){
+      this.setActiveSubLink(target)
+    } else {
+      this.setActiveLink(target);
+    }
   }
 
-  handleSubLinkClick(event){
-    event.preventDefault();
+  setActiveSubLink(target){
+    $('.sublink').removeClass('active');
+    $(target).addClass('active');
+    window.dispatchEvent(new Event('resize'));
   }
   
   setActiveLink(target){
@@ -180,31 +186,41 @@ class Nav extends Component {
     let minDistanceElem = spyelements[topDistance.indexOf(Math.min(...topDistance))]
     let id = $(minDistanceElem).attr('id');
     let navLink = $('a[href="#' + id + '"]');
-    this.setActiveLink(navLink);
+    if ($(navLink).hasClass('sublink')){
+      this.setActiveSubLink(navLink)
+    } else {
+      this.setActiveLink(navLink);
+    }
   }
-
   
   signIOButton(user){
     if (user) {
       $('#closeLoginModal').click();
-      return(
-	<div>
-	  <div className="text-center align-middle p-0 m-0 d-table ml-auto">
-	    <User size="50"/>
-	    <p className="m-0 p-0">{user.profile.name}</p>
-	  </div>
-	  <button id="signIOButton"  className="btn text-primary p-0 m-0" onClick={Meteor.logout}>
-	    <small className="p-0 m-0">Sign Out </small>
-	    <LogOut size="20" />
-	  </button>
-	</div>
+      return(	
+	     <li className="nav-item" style={{"width":"10em"}}>
+	  
+	       <a href="#" role="button" id="ProfileButton" className="nav-link dropdown-toggle text-center align-middle p-0 m-0 d-table ml-auto" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		 <User size="50"/>
+		 <p className="m-0 p-0">{user.profile.name}</p>
+	       </a>
+
+	       <div className="dropdown-menu dropdown-menu-right" aria-labelledby="ProfileButton">
+		 <button id="signIOButton"  className="btn text-primary p-0 m-0 dropdown-item" onClick={Meteor.logout}>
+		   <span className="p-0 m-0">Sign Out </span>
+		   <LogOut size="30" />
+		 </button>
+	       </div>
+	       
+	     </li> 
       )
     } else {
       return(
-	<button id="signIOButton" type="button" className="btn text-primary"  data-toggle="modal" data-target="#loginModal">
-	  <LogIn size="50" />
-	  <p className="m-0">Sign In</p>
-	</button>
+	<li className="nav-item">
+	  <button id="signIOButton" type="button" className="btn text-primary"  data-toggle="modal" data-target="#loginModal">
+	    <LogIn size="50" />
+	    <p className="m-0">Sign In</p>
+	  </button>
+	</li>
       )
     }
   }
@@ -226,9 +242,6 @@ class Nav extends Component {
 	if( $(submenu).siblings().hasClass('active') ){
 	  let left = $(submenu).offset().left;
 	  let right = left + $(submenu).width();
-	  console.log(submenu);
-	  console.log(right);
-	  console.log(window.innerWidth-100);
 	  if (right > window.innerWidth-100) {
 	    $(submenu).addClass('invisible'); 
 	  } else {

@@ -5,6 +5,12 @@ import highlights_data from './highlights_data.js';
 import visualizations_data from './visualizations_data.js';
 
 export default menuitems_data = [
+     {
+	key:'About',
+	title:'About',
+	route:'/about',
+	submenu_items:[]
+    },
     {
 	key:'Highlights',
 	title:'Highlights',
@@ -12,16 +18,10 @@ export default menuitems_data = [
 	submenu_items: get_highlights_short_titles(highlights_data)
     },
     {
-	key:'About',
-	title:'About',
-	route:'/about',
-	submenu_items:[]
-    },
-    {
 	key:'Visualizations',
 	title:'Visualizations',
 	route:'/visualizations',
-	submenu_items:get_visualizations_short_titles(visualizations_data)
+	submenu_items:get_vizcategories_keys(visualizations_data)
     },
     {
 	key:'Reports',
@@ -51,13 +51,13 @@ function get_highlights_short_titles(highlights_data) {
     );
 }
 
-function get_visualizations_short_titles(visualizations_data) {
+function get_vizcategories_keys(visualizations_data) {
     return (
-	visualizations_data.map((visualization, index)=>{
+	visualizations_data.map((category, index)=>{
 	    return (
 		{
-		    key: visualization.key,
-		    short_title: visualization.short_title
+		    key: category.category_key,
+		    short_title: category.category_short_title
 		}
 	    );
 	})
