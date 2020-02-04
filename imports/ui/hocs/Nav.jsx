@@ -187,7 +187,7 @@ class Nav extends Component {
     let id = $(minDistanceElem).attr('id');
     let navLink = $('a[href="#' + id + '"]');
     if ($(navLink).hasClass('sublink')){
-      this.setActiveSubLink(navLink)
+      this.setActiveSubLink(navLink);
     } else {
       this.setActiveLink(navLink);
     }
