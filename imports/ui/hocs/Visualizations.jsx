@@ -68,19 +68,18 @@ class Visualizations extends Component {
     )
   }
 
-  makeVizList(visualizations){
+  makeVizList(vizs){
     return(
-      visualizations.map((visualization, index) => {
+      vizs.map((viz, index) => {
 	return(
 	  <div key={index} className="col-md-3 text-wrap mh-25">
-	    <a href="" id={visualization.key+"Button"} role="button" onClick={this.openViz} data-vizkey={visualization.key} data-toggle="modal" data-target="#vizModal">
-	      <img  src={visualization.image} alt={visualization.short_title+' Image'} className="img-fluid img-thumbnail max-vh-25"></img>
-	      <h6 className="text-center">{visualization.title}</h6>
+	    <a href="" id={viz.key+"Button"} role="button" onClick={this.openViz} data-vizkey={viz.key} data-toggle="modal" data-target="#vizModal">
+	      <img  src={viz.image} alt={viz.short_title+' Image'} className="img-fluid img-thumbnail max-vh-25"></img>
+	      <h6 className="text-center">{viz.title}</h6>
 	    </a>
 	  </div>
 	)
-      })
-    )
+      }))
   }
  
   openViz(event) {
