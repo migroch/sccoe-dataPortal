@@ -45,7 +45,7 @@ class Visualizations extends Component {
     }else{
       return (
 	<div id="Visualizations" className="scrollspy container-fluid pt-1" style={containerStyle}>
-	  <div className="container-fluid text-center bg-light pb-1"><h2 className="m-auto text-primary">Charts and Dashboards</h2></div>
+	  <div className="container text-center bg-light pb-1"><h2 className="m-auto text-primary">Charts and Dashboards</h2></div>
 	  {this.makeCategoryList(visualizations)}
 	  {this.makeVizModal(this.state.selectedViz)}
 	</div>
@@ -54,17 +54,21 @@ class Visualizations extends Component {
   }
 
   makeCategoryList(visualizations){
+ //   let vizlength = category.vizs.length;
     return(
-      visualizations.map((category, index) => {
-	return(
-	  <div id={category.category_key} key={index} className="pt-1 scrollspy text-center">
-	    <h5 className="">{category.category_title}</h5>
-	    <div className="row justify-content-center p-1">
-	      {this.makeVizList(category.vizs)}
+//      <div className='row'>
+//      {
+	visualizations.map((category, index) => {
+	  return(
+	    <div id={category.category_key} key={index} className="pt-1 scrollspy text-center">
+	      
+	      <div className="row justify-content-center p-1">
+		{this.makeVizList(category.vizs)}
+	      </div>
 	    </div>
-	  </div>
-	  )
-      })
+	  )})
+ //     }
+//	</div>
     )
   }
 
@@ -78,8 +82,8 @@ class Visualizations extends Component {
 	      <h6 className="text-center">{viz.title}</h6>
 	    </a>
 	  </div>
-	)
-      }))
+	)})
+    )
   }
  
   openViz(event) {

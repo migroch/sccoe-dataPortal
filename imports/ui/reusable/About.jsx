@@ -20,7 +20,7 @@ class About extends Component {
 	<div className="container">
 	  <h3 className="display-4 text-center color-primary text-primary">Welcome to the Santa Cruz COE Data Portal!</h3>
 	  <h4 className="lead text-center text-muted">
-	    A medium for communicating and distributing education related insight and data products
+	    A medium for communicating insight and distributing data products related to education in Santa Cruz County
 	  </h4>
 	  <hr className="my-4"/>
 	  <p className="text-justify font">
