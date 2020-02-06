@@ -45,8 +45,10 @@ class Visualizations extends Component {
     }else{
       return (
 	<div id="Visualizations" className="scrollspy container-fluid pt-1" style={containerStyle}>
-	  <div className="container text-center bg-light pb-1"><h2 className="m-auto text-primary">Charts and Dashboards</h2></div>
-	  {this.makeCategoryList(visualizations)}
+	  <div className="container-fluid text-center bg-light pb-1"><h2 className="m-auto text-primary">Charts and Dashboards</h2></div>
+	  <div className='row'>
+	    {this.makeCategoryList(visualizations)}
+	  </div>
 	  {this.makeVizModal(this.state.selectedViz)}
 	</div>
       );
@@ -54,32 +56,32 @@ class Visualizations extends Component {
   }
 
   makeCategoryList(visualizations){
- //   let vizlength = category.vizs.length;
-    return(
-//      <div className='row'>
-//      {
-	visualizations.map((category, index) => {
-	  return(
-	    <div id={category.category_key} key={index} className="pt-1 scrollspy text-center">
-	      
-	      <div className="row justify-content-center p-1">
-		{this.makeVizList(category.vizs)}
-	      </div>
+    return(     
+      visualizations.map((category, index) => {
+	let colsize = category.vizs.length*3;
+	colsize = colsize.toString();
+	let title = (colsize > 3) ? category.category_title : category.category_short_title
+	return(
+	  <div id={category.category_key} key={index} className={"pt-1 scrollspy  col-md-"+colsize}>
+	    <div className="container-fluid bg-light text-center"><h5>{title}</h5></div>
+	    <div className="row  p-1">
+	      {this.makeVizList(category.vizs)}
 	    </div>
-	  )})
- //     }
-//	</div>
+	  </div>
+	)})
     )
   }
 
   makeVizList(vizs){
+    let colsize = Math.floor(12/vizs.length);
+    colsize = colsize.toString();
     return(
       vizs.map((viz, index) => {
 	return(
-	  <div key={index} className="col-md-3 text-wrap mh-25">
+	  <div key={index} className={"pb-3 text-wrap mh-25 max-vh-25 col-md-"+colsize}>
 	    <a href="" id={viz.key+"Button"} role="button" onClick={this.openViz} data-vizkey={viz.key} data-toggle="modal" data-target="#vizModal">
-	      <img  src={viz.image} alt={viz.short_title+' Image'} className="img-fluid img-thumbnail max-vh-25"></img>
 	      <h6 className="text-center">{viz.title}</h6>
+	      <img  src={viz.image} alt={viz.short_title+' Image'} className="img-fluid img-thumbnail max-vh-25"></img>
 	    </a>
 	  </div>
 	)})
@@ -150,9 +152,11 @@ class Visualizations extends Component {
   }
 
   componentDidUpdate(){
-    $("#vizModal" ).on('hide.bs.modal', this.closeViz);
+    if (!this.props.loading){
+      $("#vizModal" ).on('hide.bs.modal', this.closeViz);
     //let openViz = this.openViz;
-    //$('#VisualizationsSubMenu').children().each((index, link)=>{ $(link).on("click", openViz) });
+      //$('#VisualizationsSubMenu').children().each((index, link)=>{ $(link).on("click", openViz) });
+    }
   }
   
   componentWillUnmount() {

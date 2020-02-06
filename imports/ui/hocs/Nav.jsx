@@ -66,7 +66,7 @@ class Nav extends Component {
 	  <nav className="navbar navbar-expand-lg navbar-light bg-white fixed-top">
 	    
 	    {/*Logo & Brand*/}
-	    <a  className="navbar-brand" href="#"><img className="rounded-circle " style={styles.logoStyle} alt="Santa Cruz COE Logo" src="SCCOE_Logo_Color.png"/><div className="d-inline-block text-center align-middle pl-2"><h5 className="m-0" style={{color:'#005d80'}}>Sant Cruz COE</h5><h5 className="m-0" style={{color:'#00a6a3'}}>Data Portal</h5></div></a>
+	    <a  className="navbar-brand" href="#"><img className="rounded-circle " style={styles.logoStyle} alt="Santa Cruz COE Logo" src="SCCOE_Logo_Color.svg"/><div className="d-inline-block text-center align-middle pl-2"><h5 className="m-0" style={{color:'#005d80'}}>Sant Cruz COE</h5><h5 className="m-0" style={{color:'#00a6a3'}}>Data Portal</h5></div></a>
 
 	    {/*Collapse Toggler Button*/}
 	    <button className="navbar-toggler btn text-primary" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" style={styles.navToggler}>
@@ -226,33 +226,38 @@ class Nav extends Component {
   }
 
   componentDidMount(){
-
+   
   }
 
   componentDidUpdate(){
-    let navheight = $(".navbar").outerHeight();
-    $("body").css("padding-top", navheight);
-    this.activateScrollSpy();
-  
-    $('#LeftNavMenu').css({position:'relative', top:'-13px'});
-    $('.submenu').offset({left:$('#LeftNavMenu').offset().left});
-    
-    window.addEventListener('resize',()=>{
-      $('.submenu').each((index, submenu) => {
-	if( $(submenu).siblings().hasClass('active') ){
-	  let left = $(submenu).offset().left;
-	  let right = left + $(submenu).width();
-	  if (right > window.innerWidth-100) {
-	    $(submenu).addClass('invisible'); 
-	  } else {
-	    $(submenu).removeClass('invisible');
+    if (!this.props.loading){
+
+      let navheight = $(".navbar").outerHeight();
+      $("body").css("padding-top", navheight);
+      this.activateScrollSpy();
+      window.dispatchEvent(new Event('resize')); 
+      
+      $('#LeftNavMenu').css({position:'relative', top:'-13px'});
+      let submenuLeft = $('#LeftNavMenu').offset().left
+      $('.submenu').offset({left: submenuLeft});
+
+      window.addEventListener('resize',()=>{
+	$('.submenu').each((index, submenu) => {
+	  if( $(submenu).siblings().hasClass('active') ){
+	    let left = $(submenu).offset().left;
+	    let right = left + $(submenu).width();
+	    if (right > window.innerWidth-100) {
+	      $(submenu).addClass('invisible'); 
+	    } else {
+	      $(submenu).removeClass('invisible');
+	    }
 	  }
-	}
+	});
       });
-    });
-    
-    window.dispatchEvent(new Event('resize'));
-    $('[data-toggle="tooltip"]').tooltip();
+
+      $('[data-toggle="tooltip"]').tooltip();
+      
+    }
   }
 
   

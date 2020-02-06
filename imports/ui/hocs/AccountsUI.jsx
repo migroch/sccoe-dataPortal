@@ -32,7 +32,7 @@ export default class AccountsUIWrapper extends Component {
               </button>
 	    </div>
 	    <div className="d-flex justify-content-center">
-	      <img className="rounded-circle mt-4" style={logoStyle} alt="Santa Cruz COE Logo" src="SCCOE_Logo_Color.png"/>
+	      <img className="rounded-circle mt-4" style={logoStyle} alt="Santa Cruz COE Logo" src="SCCOE_Logo_Color.svg"/>
 	    </div>
 	    <div className="modal-body">
               <span ref="container" />

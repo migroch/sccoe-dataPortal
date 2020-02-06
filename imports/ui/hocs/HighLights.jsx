@@ -193,19 +193,20 @@ class HighLights extends Component {
   }
   
   componentDidUpdate(){
-    if (this.state.carouselState=='play'){
-      $('#HighlightsCarousel').carousel({
-	interval:10000
+    if (!this.props.loading){
+      if (this.state.carouselState=='play'){
+	$('#HighlightsCarousel').carousel({
+	  interval:10000
+	});
+      }
+      
+      $('#HighlightsCarousel').on('slide.bs.carousel', (e) => {
+	$('#HighlightsSubMenu').children().removeClass('active');
+	$($('#HighlightsSubMenu').children()[e.to]).addClass('active');
       });
-    }
-    
-    $('#HighlightsCarousel').on('slide.bs.carousel', (e) => {
-      $('#HighlightsSubMenu').children().removeClass('active');
-      $($('#HighlightsSubMenu').children()[e.to]).addClass('active');
-    });
-    
-    $('[data-toggle="tooltip"]').tooltip();
-   
+      
+      $('[data-toggle="tooltip"]').tooltip();
+   }
   }
 
   componentWillUnmount() {
