@@ -66,7 +66,13 @@ class Nav extends Component {
 	  <nav className="navbar navbar-expand-lg navbar-light bg-white fixed-top">
 	    
 	    {/*Logo & Brand*/}
-	    <a  className="navbar-brand" href="#"><img className="rounded-circle " style={styles.logoStyle} alt="Santa Cruz COE Logo" src="SCCOE_Logo_Color.svg"/><div className="d-inline-block text-center align-middle pl-2"><h5 className="m-0" style={{color:'#005d80'}}>Sant Cruz COE</h5><h5 className="m-0" style={{color:'#00a6a3'}}>Data Portal</h5></div></a>
+	    <a  className="navbar-brand" href="#">
+	      <img className="rounded-circle " style={styles.logoStyle} alt="Santa Cruz COE Logo" src="SCCOE_Logo_Color.svg"/>
+	      <div className="d-inline-block text-center align-middle pl-2">
+		<h5 className="m-0" style={{color:'#005d80'}}>Sant Cruz COE</h5>
+		<h5 className="m-0" style={{color:'#00a6a3'}}>Data Portal <small className="font-italic font-weight-light"  style={{color:'#005d80'}}>Beta</small></h5>
+	      </div>
+	    </a>
 
 	    {/*Collapse Toggler Button*/}
 	    <button className="navbar-toggler btn text-primary" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" style={styles.navToggler}>
@@ -205,7 +211,7 @@ class Nav extends Component {
 	       </a>
 
 	       <div className="dropdown-menu dropdown-menu-right" aria-labelledby="ProfileButton">
-		 <button id="signIOButton"  className="btn text-primary p-0 m-0 dropdown-item" onClick={Meteor.logout}>
+		 <button id="signIOButton"  className="btn text-primary p-0 m-0 dropdown-item" onClick={AccountsTemplates.logout}>
 		   <span className="p-0 m-0">Sign Out </span>
 		   <LogOut size="30" />
 		 </button>
@@ -225,6 +231,7 @@ class Nav extends Component {
     }
   }
 
+  
   componentDidMount(){
    
   }

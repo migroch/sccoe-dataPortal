@@ -13,6 +13,10 @@ export default visualizations_data = [
 		short_title:'SC CAASPP',
 		caption: 'Sample caption',
 		vizurl:"https://public.tableau.com/views/SC_CAASPP_v2/SCCAASPPDashboard",
+		options:{
+		    //"Governance":["County"]
+		    "Governance":""
+		},
 		image:"SCCAASPPDash.png"
 	    }
 	]
@@ -28,6 +32,7 @@ export default visualizations_data = [
 		short_title:'CHKS Suicide & Depression',
 		caption: 'Sample caption',
 		vizurl:"https://public.tableau.com/views/SIBHIcharts/SuicideDepression_Dashboard",
+		options:{},
 		image:"SuicideIdeationLGBTQDash.png"
 	    },
 	    {
@@ -36,6 +41,7 @@ export default visualizations_data = [
 		short_title:'CHKS Indicators',
 		caption: 'Sample caption',
 		vizurl:"https://public.tableau.com/views/ChksTrends_v0_1/IndicatorsDashboard",
+		options:{},
 		image:"CHKSIndicatorsDash.png"
 	    },
 	    {
@@ -44,25 +50,29 @@ export default visualizations_data = [
 		short_title:'CHKS Demographics',
 		caption: 'Sample caption',
 		vizurl:"https://public.tableau.com/views/ChksTrends_v0_1/DemographicsDashboard",
+		options:{},
 		image:"CHKSDemographicsDash.png"
 	    }   
 	]
     },
-    {
-	category_key: 'ELPAC-ELPI',
-	category_title: 'English Language Proficiency Assessments for California (ELPAC)',
-	category_short_title: 'ELPAC/ELPI',
-	vizs:[
-	    {
-		key:"ELPI",
-		title:'English Learner Progress Indicator (ELPI) - Current Status',
-		short_title:'ELPI Status',
-		caption: 'Sample caption',
-		vizurl:"https://public.tableau.com/views/ELPI/ELPICurrentStatus",
-		image:"ELPIDash.png"
-	    }
-	]
-    },
+    // {
+    // 	category_key: 'ELPAC-ELPI',
+    // 	category_title: 'English Language Proficiency Assessments for California (ELPAC)',
+    // 	category_short_title: 'ELPAC/ELPI',
+    // 	vizs:[
+    // 	    {
+    // 		key:"ELPI",
+    // 		title:'English Learner Progress Indicator (ELPI) - Current Status',
+    // 		short_title:'ELPI Status',
+    // 		caption: 'Sample caption',
+    // 		vizurl:"https://public.tableau.com/views/ELPI/ELPICurrentStatus",
+    // 		options:{
+    // 		    "Governance":["State","County"]
+    // 		},
+    // 		image:"ELPIDash.png"
+    // 	    }
+    // 	]
+    // },
     {
 	category_key: 'MathMindset',
 	category_title: 'Math Mindset',
@@ -74,6 +84,7 @@ export default visualizations_data = [
 		short_title:'Math Mindest',
 		caption: 'Sample caption',
 		vizurl:"https://public.tableau.com/views/MathMindset/MindMindsetDashboard",
+		options:{},
 		image:"MathMindsetDash.png"
 	    }
 	]

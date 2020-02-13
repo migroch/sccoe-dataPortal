@@ -115,6 +115,18 @@ class HighLights extends Component {
     return(
       highlights.map( (hilight, index) => {
 	let active = (index == 0) ? 'active' : ''
+	let vizOptions = hilight.options;
+	if (Meteor.user()){
+	  let user = Meteor.user();
+	  if (user.emails){
+	    if (user.emails[0].address.split('@')[1] == 'pvusd.net'){
+	      if (vizOptions.Governance) vizOptions.Governance.push("PajaroValley")
+	    }
+	  } else {
+	    if (vizOptions.Governance) vizOptions.Governance = ""
+	  }   
+	}
+	if (vizOptions.Governance) vizOptions.Governance = ""
 	return(
 	  <div key={index} className={"carousel-item w-100 h-100 "+active} data-interval="10000">
 	    <button id={"exploreMore"+hilight.key} className="btn btn-primary btn-sm text-center text-wrap" style={exploreMoreStyle} data-vizkey={hilight.key} data-fulldashkey={hilight.full_dashboard_key} data-toggle="tooltip" data-placement="top"  title="Explore the full dashboard" onClick={this.switchToDashboard}><span><ArrowForward size="30"/></span></button>
@@ -133,7 +145,6 @@ class HighLights extends Component {
 
   switchToDashboard(event){
     let target = event.currentTarget;
-    console.log(target);
     let vizKey = $(target).data('vizkey');
     let fulldashKey = $(target).data('fulldashkey');
     let vizs = tableauSoftware.VizManager.getVizs();

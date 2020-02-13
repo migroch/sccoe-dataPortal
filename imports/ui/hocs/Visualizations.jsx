@@ -29,7 +29,8 @@ class Visualizations extends Component {
     
     const containerStyle = {
       width: this.state.width,
-      height: this.state.height,
+      //height: this.state.height,
+      height:"auto"
     }
 
     const { user, loading, visualizationsExists, visualizations } = this.props;
@@ -115,12 +116,24 @@ class Visualizations extends Component {
   makeVizModal(selectedViz){
     let vizTitle = (selectedViz) ?  selectedViz.title : 'No viz selected';
     let vizUrl = (selectedViz) ? selectedViz.vizurl : null ;
+    let vizOptions = (selectedViz) ? selectedViz.options : null ;
     let viz = null
     if (vizUrl){
-      viz = (<TableauViz vizId='VisualizationsModalViz' url={vizUrl} />)
+      if (Meteor.user()){
+	let user = Meteor.user();
+	if (user.emails){
+	  if (user.emails[0].address.split('@')[1] == 'pvusd.net'){
+	    if (vizOptions.Governance) vizOptions.Governance.push("PajaroValley")
+	  }
+	  } else {
+	    if (vizOptions.Governance) vizOptions.Governance = ""
+	  }   
+      }
+      viz = (<TableauViz vizId='VisualizationsModalViz' url={vizUrl} options={vizOptions} />)
     }
+    
     return(
-      <div id="vizModal" className="modal fade p-0"  tabIndex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div id="vizModal" className="modal fade p-0"  tabIndex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
 	<div id="vizModalDialog" className="modal-dialog" role="document" style={{maxWidth:'98vw', height:'98vh'}}>
 	  <div className="modal-content h-100 w-100">
 	    <div className="modal-header align-items-center">

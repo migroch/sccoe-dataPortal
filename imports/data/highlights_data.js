@@ -8,7 +8,9 @@ export default highlights_data = [
 	short_title:'CAASPP Gap',
 	caption: 'Sample caption',
 	vizurl:"https://public.tableau.com/views/SC_CAASPP_v2/GapHighlightD",
-	options:{},
+	options:{
+	    "Governance":["County"]
+	},
 	full_dashboard_key:"SC CAASPP Dashboard",
 	full_dashboard_name:"Santa Cruz CAASPP Dashboard"
     },

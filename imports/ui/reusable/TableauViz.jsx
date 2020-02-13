@@ -37,7 +37,6 @@ class TableauViz extends Component {
       height: '100%',
     }
     options = Object.assign({}, options, this.props.options);
-
     this.viz = new tableauSoftware.Viz(vizContainer, url, options);
   }
 

@@ -28,7 +28,7 @@ Meteor.startup(() => {
 
     // Upsert visualizations_data into visualizations collection
     visualizations_data.forEach((category)=>{
-	visualizations.upsert({category: category}, category, {upsert: true});
+	visualizations.upsert({category_key: category.category_key}, category, {upsert: true});
     });    
 });
 
