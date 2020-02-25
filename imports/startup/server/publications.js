@@ -17,3 +17,21 @@ Meteor.publish("highlights", function(){
 Meteor.publish("visualizations", function(){
     return visualizations.find({});
 });
+
+Meteor.publish(null, function(){
+    if (this.userId) {
+	return Meteor.users.find({_id: this.userId}, {fields: {email: 1, verified_email: 1} });   
+    } else {
+	return this.ready();
+    }
+});
+
+Meteor.publish(null, function () {
+  if (this.userId) {
+      return Meteor.roleAssignment.find({ 'user._id': this.userId });
+  } else {
+      return this.ready();
+  }
+});
+
+

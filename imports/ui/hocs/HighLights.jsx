@@ -116,17 +116,15 @@ class HighLights extends Component {
       highlights.map( (hilight, index) => {
 	let active = (index == 0) ? 'active' : ''
 	let vizOptions = hilight.options;
-	if (Meteor.user()){
-	  let user = Meteor.user();
-	  if (user.emails){
-	    if (user.emails[0].address.split('@')[1] == 'pvusd.net'){
-	      if (vizOptions.Governance) vizOptions.Governance.push("PajaroValley")
-	    }
+	if (Meteor.user()  && Meteor.user().verified_email){
+	  let userId = Meteor.userId;
+	  let roles = Roles.getRolesForUser(userId);
+	  if (roles.includes('All') || roles.includes('Admin')){
+	    if (vizOptions.Governance) vizOptions.Governance = "";
 	  } else {
-	    if (vizOptions.Governance) vizOptions.Governance = ""
+	    if (vizOptions.Governance) roles.forEach((role)=>{vizOptions.Governance.push(role)})
 	  }   
 	}
-	if (vizOptions.Governance) vizOptions.Governance = ""
 	return(
 	  <div key={index} className={"carousel-item w-100 h-100 "+active} data-interval="10000">
 	    <button id={"exploreMore"+hilight.key} className="btn btn-primary btn-sm text-center text-wrap" style={exploreMoreStyle} data-vizkey={hilight.key} data-fulldashkey={hilight.full_dashboard_key} data-toggle="tooltip" data-placement="top"  title="Explore the full dashboard" onClick={this.switchToDashboard}><span><ArrowForward size="30"/></span></button>

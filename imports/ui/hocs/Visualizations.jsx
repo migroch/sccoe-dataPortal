@@ -119,15 +119,14 @@ class Visualizations extends Component {
     let vizOptions = (selectedViz) ? selectedViz.options : null ;
     let viz = null
     if (vizUrl){
-      if (Meteor.user()){
-	let user = Meteor.user();
-	if (user.emails){
-	  if (user.emails[0].address.split('@')[1] == 'pvusd.net'){
-	    if (vizOptions.Governance) vizOptions.Governance.push("PajaroValley")
-	  }
-	  } else {
-	    if (vizOptions.Governance) vizOptions.Governance = ""
-	  }   
+      if (Meteor.user() && Meteor.user().verified_email){
+	let userId = Meteor.userId;
+	let roles = Roles.getRolesForUser(userId);
+	if (roles.includes('All') || roles.includes('Admin')){
+	  if (vizOptions.Governance) vizOptions.Governance = ""
+	} else {
+	  if (vizOptions.Governance) roles.forEach((role)=>{vizOptions.Governance.push(role)})
+	}   
       }
       viz = (<TableauViz vizId='VisualizationsModalViz' url={vizUrl} options={vizOptions} />)
     }

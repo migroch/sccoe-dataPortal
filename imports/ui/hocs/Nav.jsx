@@ -202,6 +202,15 @@ class Nav extends Component {
   signIOButton(user){
     if (user) {
       $('#closeLoginModal').click();
+      let email;
+      if (user.verified_email){
+	email = <p className="m-0 text-info">{user.email} (Verified)</p>
+      } else {
+	email = <p className="m-0 text-danger">{user.email} (Not verified)</p>
+      }
+      let roles = Roles.getRolesForUser(user._id);
+      if (roles.includes('All')) roles = ['All'];
+      let roleList = roles.map((role, index)=><li key={index} className="list-inline-item text-info">{role}</li>)
       return(	
 	     <li className="nav-item" style={{"width":"10em"}}>
 	  
@@ -211,7 +220,15 @@ class Nav extends Component {
 	       </a>
 
 	       <div className="dropdown-menu dropdown-menu-right" aria-labelledby="ProfileButton">
-		 <button id="signIOButton"  className="btn text-primary p-0 m-0 dropdown-item" onClick={AccountsTemplates.logout}>
+		 <div className="px-2 pb-2">
+		   <p className="m-0">Email:</p>
+		   {email}
+		 </div>
+		 <div className="px-2 pb-2">
+		   <p className="m-0">Permissions:</p>
+		   <ul className="list-inline">{roleList}</ul>
+		 </div>
+		 <button id="signIOButton"  className="btn text-primary px-2 text-center" onClick={AccountsTemplates.logout}>
 		   <span className="p-0 m-0">Sign Out </span>
 		   <LogOut size="30" />
 		 </button>
@@ -222,7 +239,7 @@ class Nav extends Component {
     } else {
       return(
 	<li className="nav-item">
-	  <button id="signIOButton" type="button" className="btn text-primary"  data-toggle="modal" data-target="#loginModal">
+	  <button id="signIOButton" type="button" className="btn text-primary"  data-toggle="modal" data-target="#loginModal" onClick={this.handleSignInClick}>
 	    <LogIn size="50" />
 	    <p className="m-0">Sign In</p>
 	  </button>
@@ -231,6 +248,9 @@ class Nav extends Component {
     }
   }
 
+  handleSignInClick(){
+    AccountsTemplates.setState('signIn')
+  }
   
   componentDidMount(){
    

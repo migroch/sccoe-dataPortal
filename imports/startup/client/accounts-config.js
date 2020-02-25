@@ -1,59 +1,59 @@
 //accounts-config.js
 // User accounts configuration
 
-Accounts.ui.config({
-    requestPermissions: {
-	google: [
-	    'https://www.googleapis.com/auth/userinfo.profile',
-            'https://www.googleapis.com/auth/userinfo.email',
-	],	
-    },
-    requestOfflineToken: {
-	google: true
-    },
-});
-
 var VizsAddData = (user)=>{
     let vizs = tableauSoftware.VizManager.getVizs();
-    let viz = vizs.find((viz) => viz.getParentElement().id == 'SCCAASPP');
-    if (user.emails){
-	if (user.emails[0].address.split('@')[1] == 'pvusd.net')
-	viz.getWorkbook().getActiveSheet().getWorksheets()[0].applyFilterAsync("Governance", ["PajaroValley"],  tableau.FilterUpdateType.ADD);
+    let userId = Meteor.userId;
+    let roles = Roles.getRolesForUser(userId);
+    if (roles.includes('All') || roles.includes('Admin')) {
+	vizs.forEach((viz)=>{
+	    viz.getWorkbook().getActiveSheet().getWorksheets()[0].applyFilterAsync("Governance", "",  tableauSoftware.FilterUpdateType.ALL);
+	});
     } else {
-	viz.getWorkbook().getActiveSheet().getWorksheets()[0].applyFilterAsync("Governance", "",  tableauSoftware.FilterUpdateType.ALL);
-    }   
+	vizs.forEach((viz)=>{
+	    viz.getWorkbook().getActiveSheet().getWorksheets()[0].applyFilterAsync("Governance", roles,  tableau.FilterUpdateType.ADD);
+    	});
+    }
 };
 
 var VizsRemoveData = () =>{
     let vizs = tableauSoftware.VizManager.getVizs();
-    let viz = vizs.find((viz) => viz.getParentElement().id == 'SCCAASPP');
-    viz.getWorkbook().getActiveSheet().getWorksheets()[0].applyFilterAsync("Governance", ["County"],  tableauSoftware.FilterUpdateType.REPLACE);
+    vizs.forEach((viz)=>{
+	viz.getWorkbook().getActiveSheet().getWorksheets()[0].applyFilterAsync("Governance", ["County"],  tableauSoftware.FilterUpdateType.REPLACE);
+    });	
 };
+
 
 var mySubmitFunc = (error, state)=>{
     if (!error) {
 	if (state === "signIn") {
 	    // Successfully signed in
-	    //VizsAddData(Meteor.user());
+	    console.log('User signed in');
+	    console.log(Meteor.user());
+	    if(Meteor.user().verified_email){
+		VizsAddData(Meteor.user());	    
+	    }
 	}
 	if (state === "signUp") {
 	    // Successfully registered
-	    //VizsAddData(Meteor.user());
+	    console.log('User registration submitted');
 	}
     }
 };
 
 var myLogoutFunc = ()=>{
-    //VizsRemoveData();
+    VizsRemoveData();
 };
+
 
 AccountsTemplates.configure({
     // Behavior
     confirmPassword: true,
     enablePasswordChange: true,
     forbidClientAccountCreation: false,
-    overrideLoginErrors: true,
-    sendVerificationEmail: false,
+    overrideLoginErrors: false,
+    enforceEmailVerification: true,
+    sendVerificationEmail: true,
     lowercaseUsername: false,
     focusFirstInput: true,
 
@@ -62,10 +62,10 @@ AccountsTemplates.configure({
     showForgotPasswordLink: true,
     showLabels: true,
     showPlaceholders: true,
-    showResendVerificationEmailLink: false,
+    showResendVerificationEmailLink: true,
 
     // Client-side Validation
-    continuousValidation: false,
+    continuousValidation: true,
     negativeFeedback: false,
     negativeValidation: true,
     positiveValidation: true,
@@ -88,16 +88,20 @@ AccountsTemplates.configure({
 
     // Texts
     texts: {
-      button: {
-          signUp: "Register!"
-      },
+	errors:{
+	    loginForbidden: "Unrecognized credentials",
+	},
+	button: {
+            signUp: "Register!"
+	},
 	socialIcons: {
-          google: 'SCCOE_Logo_Color.png'
+            //google: 'SCCOE_Logo_Color.svg'
         },
-      //socialSignUp: "Register",
-      title: {
-          forgotPwd: "Recover Your Password"
-      },
+	//socialSignUp: "Register",
+	title: {
+            forgotPwd: "Recover Your Password"
+	},
+	
     },
 });
 
@@ -108,4 +112,22 @@ AccountsTemplates.addField({
     required: true
 });
 
+
+Accounts.onEmailVerificationLink(function(token,done){
+    Accounts.verifyEmail(token, function (error) {
+	if (error) {
+	    console.log('ERROR while verifying email: '+error);
+	} else {
+    	    Meteor.call('updateEmailVerified', Meteor.user(), (err, res)=>{
+		if (err) {
+		    console.log('ERROR while updating user.verified_email: '+err);   
+		} else {
+		     console.log('Email succefully verified and updated');
+		     VizsAddData(Meteor.user());
+		}
+	    });
+	}
+	done();
+  });
+});
 

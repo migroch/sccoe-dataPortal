@@ -15,3 +15,7 @@
   display: none;
 }
 
+.accounts-dialog .login-button{
+  @extend .btn;
+  @extend .btn-primary;
+}

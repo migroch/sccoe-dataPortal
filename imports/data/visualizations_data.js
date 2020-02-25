@@ -14,8 +14,7 @@ export default visualizations_data = [
 		caption: 'Sample caption',
 		vizurl:"https://public.tableau.com/views/SC_CAASPP_v2/SCCAASPPDashboard",
 		options:{
-		    //"Governance":["County"]
-		    "Governance":""
+		    "Governance":["County"]
 		},
 		image:"SCCAASPPDash.png"
 	    }
@@ -73,20 +72,20 @@ export default visualizations_data = [
     // 	    }
     // 	]
     // },
-    {
-	category_key: 'MathMindset',
-	category_title: 'Math Mindset',
-	category_short_title: 'Math Mindset',
-	vizs:[
-	    {
-		key:"MathMindset",
-		title:'Kevin Drinkard Math Mindset Survey Results',
-		short_title:'Math Mindest',
-		caption: 'Sample caption',
-		vizurl:"https://public.tableau.com/views/MathMindset/MindMindsetDashboard",
-		options:{},
-		image:"MathMindsetDash.png"
-	    }
-	]
-    }
+    // {
+    // 	category_key: 'MathMindset',
+    // 	category_title: 'Math Mindset',
+    // 	category_short_title: 'Math Mindset',
+    // 	vizs:[
+    // 	    {
+    // 		key:"MathMindset",
+    // 		title:'Kevin Drinkard Math Mindset Survey Results',
+    // 		short_title:'Math Mindest',
+    // 		caption: 'Sample caption',
+    // 		vizurl:"https://public.tableau.com/views/MathMindset/MindMindsetDashboard",
+    // 		options:{},
+    // 		image:"MathMindsetDash.png"
+    // 	    }
+    // 	]
+    // }
 ];

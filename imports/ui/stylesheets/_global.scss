@@ -3,9 +3,11 @@
 
 //$primary: #00a6a3 !default;
 $primary: #005d80;
+$info: #00a6a3;
 $brand-primary: $primary;
-$link-color:     $primary;
-$link-active-color:#00a6a3;
+$brand-info: $info;
+$link-color:  $primary;
+$link-active-color: $info;
 $link-hover-color:   $link-active-color;
 $link-hover-decoration: none;
 $navbar-default-link-color: $link-color;
