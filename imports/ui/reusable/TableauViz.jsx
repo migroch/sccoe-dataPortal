@@ -13,6 +13,8 @@ class TableauViz extends Component {
     this.state = {
       inview: true,
     };
+
+    this.handleGovernance = this.handleGovernance.bind(this);
   }
 
   render() {
@@ -35,6 +37,7 @@ class TableauViz extends Component {
       device: 'desktop',
       width: '100%',
       height: '100%',
+      onFirstInteractive: this.handleGovernance,
     }
     options = Object.assign({}, options, this.props.options);
     this.viz = new tableauSoftware.Viz(vizContainer, url, options);
@@ -47,19 +50,39 @@ class TableauViz extends Component {
    // });
   }
   
-  handleClick(event) {
-    event.preventDefault();
+  handleGovernance() {
+    let viz = this.viz;
+    let worksheets;
+    if (viz.getWorkbook().getActiveSheet().getSheetType() == "worksheet"){
+      worksheets = [viz.getWorkbook().getActiveSheet()]
+    } else {
+      worksheets = viz.getWorkbook().getActiveSheet().getWorksheets();
+    }
+    let user = this.props.user;
+    if (user && user.verified_email) {
+      let userId = this.props.user._id;
+      let roles = Roles.getRolesForUser(userId);
+      if (roles.includes('All') || roles.includes('Admin')) {
+	worksheets.forEach((sheet)=>{sheet.applyFilterAsync("Governance", "",  tableauSoftware.FilterUpdateType.ALL);})
+      } else {
+	worksheets.forEach((sheet)=>{sheet.applyFilterAsync("Governance", roles,  tableauSoftware.FilterUpdateType.ADD);})
+      }
+    } else {
+      worksheets.forEach((sheet)=>{sheet.applyFilterAsync("Governance", ["State", "County"],  tableauSoftware.FilterUpdateType.REPLACE);})
+    }
   }
-  
+
   componentDidMount(){
     this.renderTableauViz(this.props.url);
     $('.tab-vizItems').css("display","none");
+    this.viz.addEventListener("parametervaluechange", this.handleGovernance)
     //this.updateDimensions();
     //window.addEventListener("resize", this.updateDimensions.bind(this));
   }
   
   componentDidUpdate(){
     $('.tab-vizItems').css("display","none");
+    this.handleGovernance();
     //console.log(this.state.width, this.state.height);
    // console.log($('#vizContainer').outerWidth(), $('#vizContainer').outerHeight()) ;  
   }

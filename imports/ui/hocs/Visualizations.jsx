@@ -119,15 +119,7 @@ class Visualizations extends Component {
     let vizOptions = (selectedViz) ? selectedViz.options : null ;
     let viz = null
     if (vizUrl){
-      if (Meteor.user() && Meteor.user().verified_email){
-	let userId = Meteor.userId;
-	let roles = Roles.getRolesForUser(userId);
-	if (roles.includes('All') || roles.includes('Admin')){
-	  if (vizOptions.Governance) vizOptions.Governance = ""
-	} else {
-	  if (vizOptions.Governance) roles.forEach((role)=>{vizOptions.Governance.push(role)})
-	}   
-      }
+      
       viz = (<TableauViz vizId='VisualizationsModalViz' url={vizUrl} options={vizOptions} />)
     }
     
@@ -173,7 +165,7 @@ class Visualizations extends Component {
   
   componentWillUnmount() {
     window.removeEventListener("resize", this.updateDimensions.bind(this));
-    this.closeViz();
+    //this.closeViz();
   }
   
 }

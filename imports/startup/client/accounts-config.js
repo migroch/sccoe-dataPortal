@@ -1,28 +1,6 @@
 //accounts-config.js
 // User accounts configuration
 
-var VizsAddData = (user)=>{
-    let vizs = tableauSoftware.VizManager.getVizs();
-    let userId = Meteor.userId;
-    let roles = Roles.getRolesForUser(userId);
-    if (roles.includes('All') || roles.includes('Admin')) {
-	vizs.forEach((viz)=>{
-	    viz.getWorkbook().getActiveSheet().getWorksheets()[0].applyFilterAsync("Governance", "",  tableauSoftware.FilterUpdateType.ALL);
-	});
-    } else {
-	vizs.forEach((viz)=>{
-	    viz.getWorkbook().getActiveSheet().getWorksheets()[0].applyFilterAsync("Governance", roles,  tableau.FilterUpdateType.ADD);
-    	});
-    }
-};
-
-var VizsRemoveData = () =>{
-    let vizs = tableauSoftware.VizManager.getVizs();
-    vizs.forEach((viz)=>{
-	viz.getWorkbook().getActiveSheet().getWorksheets()[0].applyFilterAsync("Governance", ["County"],  tableauSoftware.FilterUpdateType.REPLACE);
-    });	
-};
-
 
 var mySubmitFunc = (error, state)=>{
     if (!error) {
@@ -30,9 +8,6 @@ var mySubmitFunc = (error, state)=>{
 	    // Successfully signed in
 	    console.log('User signed in');
 	    console.log(Meteor.user());
-	    if(Meteor.user().verified_email){
-		VizsAddData(Meteor.user());	    
-	    }
 	}
 	if (state === "signUp") {
 	    // Successfully registered
@@ -42,7 +17,7 @@ var mySubmitFunc = (error, state)=>{
 };
 
 var myLogoutFunc = ()=>{
-    VizsRemoveData();
+     console.log('User signed out');
 };
 
 

@@ -40,7 +40,9 @@ export default visualizations_data = [
 		short_title:'CHKS Indicators',
 		caption: 'Sample caption',
 		vizurl:"https://public.tableau.com/views/ChksTrends_v0_1/IndicatorsDashboard",
-		options:{},
+		options:{
+		     "Governance":["County"]
+		},
 		image:"CHKSIndicatorsDash.png"
 	    },
 	    {
@@ -54,24 +56,24 @@ export default visualizations_data = [
 	    }   
 	]
     },
-    // {
-    // 	category_key: 'ELPAC-ELPI',
-    // 	category_title: 'English Language Proficiency Assessments for California (ELPAC)',
-    // 	category_short_title: 'ELPAC/ELPI',
-    // 	vizs:[
-    // 	    {
-    // 		key:"ELPI",
-    // 		title:'English Learner Progress Indicator (ELPI) - Current Status',
-    // 		short_title:'ELPI Status',
-    // 		caption: 'Sample caption',
-    // 		vizurl:"https://public.tableau.com/views/ELPI/ELPICurrentStatus",
-    // 		options:{
-    // 		    "Governance":["State","County"]
-    // 		},
-    // 		image:"ELPIDash.png"
-    // 	    }
-    // 	]
-    // },
+    {
+    	category_key: 'ELPAC-ELPI',
+    	category_title: 'English Language Proficiency Assessments for California (ELPAC)',
+    	category_short_title: 'ELPAC/ELPI',
+    	vizs:[
+    	    {
+    		key:"ELPI",
+    		title:'English Learner Progress Indicator (ELPI) - Current Status',
+    		short_title:'ELPI Status',
+    		caption: 'Sample caption',
+    		vizurl:"https://public.tableau.com/views/ELPI/ELPICurrentStatus",
+    		options:{
+    		    "Governance":["State","County"]
+    		},
+    		image:"ELPIDash.png"
+    	    }
+    	]
+    },
     // {
     // 	category_key: 'MathMindset',
     // 	category_title: 'Math Mindset',
