@@ -1,37 +1,70 @@
-// HighLights.jsx
-// Highlights showcae component
+// Reports.jsx
+// Reports showcae component
 
 import React, { Component } from 'react';
 import { withTracker } from 'meteor/react-meteor-data';
-import Highlights from '../../api/Highlights';
+import reports from '../../api/reports';
 
-class Highlights extends Component {
+import {tableau} from 'tableau-api';
+import TableauViz  from '../reusable/TableauViz.jsx';
+
+class Reports extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      inview: true,
+      width: window.innerWidth,
+      height: window.innerHeight - $('.navbar').outerHeight(),
     };
+
+    
+  }
+
+  render() {
+
+    const containerStyle = {
+      width: this.state.width,
+      //height: this.state.height,
+      height:"auto"
+    }
+
+    const { user, loading, visualizationsExists, visualizations } = this.props;
+
+    if(loading){
+      return(
+	<div className="d-flex justify-content-center text-primary">
+	  <div className="spinner-border" role="status">
+	    <span className="sr-only">Loading...</span>
+	  </div>
+	</div>
+      );
+    } else {
+      return (
+	<div id="Reports" className="scrollspy container-fluid pt-1" style={containerStyle}>
+	  <div className="container-fluid text-center bg-light pb-1"><h2 className="m-auto text-primary">Reports</h2></div>
+
+	</div>
+      );
+    }
   }
 
   handleClick(event) {
     event.preventDefault();
   }
-
-  render() {
-    return (
-      
-    );
-  }
+  
 }
 
 export default withTracker(() => {
-  Meteor.subscribe('Highlights');
-
+  const user = Meteor.user();
+  const reportsHandle = Meteor.subscribe('reports');
+  const loading = !reportsHandle.ready();
+  const reports_fetch = reports.find({}, { sort: { createdAt: -1 } }).fetch();
+  const reportsExists = !loading && !!reports;
   return {
-    highligths: Tasks.find({}, { sort: { createdAt: -1 } }).fetch(),
-    user: Meteor.user(),
+    user,
+    loading,
+    reportsExists,   
+    reports: reportsExists ? reports_fetch : {}
   };
-})(Highlights);
+})(Reports);
 
-  

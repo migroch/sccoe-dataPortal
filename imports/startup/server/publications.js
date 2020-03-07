@@ -5,6 +5,7 @@ import { Meteor } from 'meteor/meteor';
 import menuitems from '../../api/menuitems';
 import highlights from '../../api/highlights';
 import visualizations from '../../api/visualizations';
+import reports from '../../api/reports';
 
 Meteor.publish("menuitems", function(){
     return menuitems.find({});
@@ -17,6 +18,11 @@ Meteor.publish("highlights", function(){
 Meteor.publish("visualizations", function(){
     return visualizations.find({});
 });
+
+Meteor.publish("reports", function(){
+    return reports.find({});
+});
+
 
 Meteor.publish(null, function(){
     if (this.userId) {

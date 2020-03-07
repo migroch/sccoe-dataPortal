@@ -46,7 +46,7 @@ class Visualizations extends Component {
     }else{
       return (
 	<div id="Visualizations" className="scrollspy container-fluid pt-1" style={containerStyle}>
-	  <div className="container-fluid text-center bg-light pb-1"><h2 className="m-auto text-primary">Charts and Dashboards</h2></div>
+	  <div className="container-fluid text-center bg-light pb-1"><h2 className="m-auto text-primary">Visualizations</h2></div>
 	  <div className='row'>
 	    {this.makeCategoryList(visualizations)}
 	  </div>
