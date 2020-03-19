@@ -51,24 +51,32 @@ class TableauViz extends Component {
   }
   
   handleGovernance() {
+    let user = this.props.user;
     let viz = this.viz;
     let worksheets;
-    if (viz.getWorkbook().getActiveSheet().getSheetType() == "worksheet"){
-      worksheets = [viz.getWorkbook().getActiveSheet()]
-    } else {
-      worksheets = viz.getWorkbook().getActiveSheet().getWorksheets();
-    }
-    let user = this.props.user;
-    if (user && user.verified_email) {
-      let userId = this.props.user._id;
-      let roles = Roles.getRolesForUser(userId);
-      if (roles.includes('All') || roles.includes('Admin')) {
-	worksheets.forEach((sheet)=>{sheet.applyFilterAsync("Governance", "",  tableauSoftware.FilterUpdateType.ALL);})
-      } else {
-	worksheets.forEach((sheet)=>{sheet.applyFilterAsync("Governance", roles,  tableauSoftware.FilterUpdateType.ADD);})
+    
+    if (viz){
+      try{
+	if (viz.getWorkbook().getActiveSheet().getSheetType() == "worksheet"){
+	  worksheets = [viz.getWorkbook().getActiveSheet()]
+	} else {
+	  worksheets = viz.getWorkbook().getActiveSheet().getWorksheets();
+	}
+	
+	if (user && user.verified_email) {
+	  let userId = this.props.user._id;
+	  let roles = Roles.getRolesForUser(userId);
+	  if (roles.includes('All') || roles.includes('Admin')) {
+	    worksheets.forEach((sheet)=>{sheet.applyFilterAsync("Governance", "",  tableauSoftware.FilterUpdateType.ALL);})
+	  } else {
+	    worksheets.forEach((sheet)=>{sheet.applyFilterAsync("Governance", roles,  tableauSoftware.FilterUpdateType.ADD);})
+	  }
+	} else {
+	  worksheets.forEach((sheet)=>{sheet.applyFilterAsync("Governance", ["State", "County"],  tableauSoftware.FilterUpdateType.REPLACE);})
+	}
+      } catch (err) {
+	console.log("Viz not ready to handle user change");
       }
-    } else {
-      worksheets.forEach((sheet)=>{sheet.applyFilterAsync("Governance", ["State", "County"],  tableauSoftware.FilterUpdateType.REPLACE);})
     }
   }
 

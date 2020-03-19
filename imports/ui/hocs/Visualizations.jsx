@@ -48,7 +48,7 @@ class Visualizations extends Component {
 	<div id="Visualizations" className="scrollspy container-fluid pt-2 bg-light" style={containerStyle}>
 	  <div className="container-fluid bg-light pb-2">
 	    <h2 className="m-auto text-primary text-center">Visualizations</h2>
-	    <h5 className="text-center">Below you can find a set of dashboards and charts that we have created to explore education related datasets for Santa Cruz County and its school districts</h5>
+	    <h5 className="">Below you can find a set of dashboards and charts that we have created to explore education related datasets for Santa Cruz County and its school districts.</h5>
 	  </div>
 	  <div className='row'>
 	    {this.makeCategoryList(visualizations)}
