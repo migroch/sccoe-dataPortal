@@ -107,7 +107,7 @@ class Nav extends Component {
 	let active = (index == 0) ? 'active' : ''
 	let invisible = (index == 0) ? '' : 'invisible'
 	let Link
-	if(['Highlights', 'About', 'Visualizations'].includes(item.key)){
+	if(['Highlights', 'About', 'Visualizations', 'Reports'].includes(item.key)){
 	  Link = (<a href={"#"+item.key} id={item.key+'Link'} className={"nav-link "+active}  onClick={this.handleLinkClick}>{item.title}</a>)
 	} else {
 	  Link = (<a type="button" href={"#"+item.key} id={item.key+'Link'} className={"nav-link "+active}  onClick={this.handleLinkClick} data-toggle="tooltip" data-placement="right" title="Coming soon!">{item.title}</a>)
@@ -125,7 +125,7 @@ class Nav extends Component {
 
   makeSubMenu(menu_item){
     let submenu_items = menu_item.submenu_items;
-
+ 
     return(
       submenu_items.map( (item, index) =>{
 	let active = (index == 0) ? 'active' : ''

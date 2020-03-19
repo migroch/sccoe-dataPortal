@@ -3,6 +3,7 @@
 
 import highlights_data from './highlights_data.js';
 import visualizations_data from './visualizations_data.js';
+import reports_data from './reports_data.js';
 
 export default menuitems_data = [
      {
@@ -27,7 +28,7 @@ export default menuitems_data = [
 	key:'Reports',
 	title:'Reports',
 	route:'/reports',
-	submenu_items:[]
+	submenu_items:get_reports_short_titles(reports_data)
     },
     {
 	key:'DataSets',
@@ -47,6 +48,19 @@ function get_highlights_short_titles(highlights_data) {
     return (
 	highlights_data.map((highlight, index)=>{
 	   return  highlight.short_title;
+	})
+    );
+}
+
+function get_reports_short_titles(reports_data) {
+    return (
+	reports_data.map((report, index)=>{
+	    return (
+		{
+		    key: report.key,
+		    short_title: report.short_title
+		}
+	    ); 
 	})
     );
 }

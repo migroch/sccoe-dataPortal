@@ -11,7 +11,7 @@ export default visualizations_data = [
 		key:"SCCAASPPDash",
 		title:'Santa Cruz CAASPP Dashboard',
 		short_title:'SC CAASPP',
-		caption: 'Sample caption',
+		caption: 'Explore CAASPP results for Santa Cruz County districts',
 		vizurl:"https://public.tableau.com/views/SC_CAASPP_v2/SCCAASPPDashboard",
 		options:{
 		    "Governance":["County"]
@@ -29,7 +29,7 @@ export default visualizations_data = [
 		key:"CHKSSuicideDepression",
 		title:'Santa Cruz CHKS Suicide & Depression LGBTQ+ Dashboard',
 		short_title:'CHKS Suicide & Depression',
-		caption: 'Sample caption',
+		caption: "Compare reponses to the suicide and depression questions in the CHKS survey between self-identified LGBTQ+ and Non-LGBTQ+ students",
 		vizurl:"https://public.tableau.com/views/SIBHIcharts/SuicideDepression_Dashboard",
 		options:{},
 		image:"SuicideIdeationLGBTQDash.png"
@@ -37,8 +37,8 @@ export default visualizations_data = [
 	    {
 		key:"CHKSIndicators",
 		title:'Santa Cruz CHKS Indicators Dashboard',
-		short_title:'CHKS Indicators',
-		caption: 'Sample caption',
+		short_title:'Explore the responses from Santa Cruz County students to the CHKS survey across years, with the ability to group and compare based on demographic information',
+		caption: 'Browse the student responses to the CHKS survey questions and idicators across time',
 		vizurl:"https://public.tableau.com/views/ChksTrends_v0_1/IndicatorsDashboard",
 		options:{
 		     "Governance":["County"]
@@ -49,7 +49,7 @@ export default visualizations_data = [
 		key:"CHKSDemographics",
 		title:'Santa Cruz CHKS Demographics Dashboard',
 		short_title:'CHKS Demographics',
-		caption: 'Sample caption',
+		caption: "Explore the demographic information of students that have taken the CHKS survey in Santa Cruz County",
 		vizurl:"https://public.tableau.com/views/ChksTrends_v0_1/DemographicsDashboard",
 		options:{},
 		image:"CHKSDemographicsDash.png"
@@ -65,7 +65,7 @@ export default visualizations_data = [
     		key:"ELPI",
     		title:'English Learner Progress Indicator (ELPI) - Current Status',
     		short_title:'ELPI Status',
-    		caption: 'Sample caption',
+    		caption: "Look at the English learners progress status in Santa Cruz County districts and schools based on the ELPAC's English Learner Progress Indicator (ELPI)",
     		vizurl:"https://public.tableau.com/views/ELPI/ELPICurrentStatus",
     		options:{
     		    "Governance":["State","County"]

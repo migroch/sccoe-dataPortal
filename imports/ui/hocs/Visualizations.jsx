@@ -45,8 +45,11 @@ class Visualizations extends Component {
       )
     }else{
       return (
-	<div id="Visualizations" className="scrollspy container-fluid pt-1" style={containerStyle}>
-	  <div className="container-fluid text-center bg-light pb-1"><h2 className="m-auto text-primary">Visualizations</h2></div>
+	<div id="Visualizations" className="scrollspy container-fluid pt-2 bg-light" style={containerStyle}>
+	  <div className="container-fluid bg-light pb-2">
+	    <h2 className="m-auto text-primary text-center">Visualizations</h2>
+	    <h5 className="text-center">Below you can find a set of dashboards and charts that we have created to explore education related datasets for Santa Cruz County and its school districts</h5>
+	  </div>
 	  <div className='row'>
 	    {this.makeCategoryList(visualizations)}
 	  </div>
@@ -64,7 +67,9 @@ class Visualizations extends Component {
 	let title = (colsize > 3) ? category.category_title : category.category_short_title
 	return(
 	  <div id={category.category_key} key={index} className={"pt-1 scrollspy  col-md-"+colsize}>
-	    <div className="container-fluid bg-light text-center"><h5>{title}</h5></div>
+	    <div className="container-fluid bg-white text-center">
+	      <h5>{title}</h5>
+	    </div>
 	    <div className="row  p-1">
 	      {this.makeVizList(category.vizs)}
 	    </div>
@@ -79,10 +84,11 @@ class Visualizations extends Component {
     return(
       vizs.map((viz, index) => {
 	return(
-	  <div key={index} className={"pb-3 text-wrap mh-25 max-vh-25 col-md-"+colsize}>
+	  <div key={index} className={"card pb-3 text-wrap mh-25 max-vh-25 col-md-"+colsize}>
 	    <a href="" id={viz.key+"Button"} role="button" onClick={this.openViz} data-vizkey={viz.key} data-toggle="modal" data-target="#vizModal">
-	      <h6 className="text-center">{viz.title}</h6>
+	      <h6 className="card-title text-center pt-3">{viz.title}</h6>
 	      <img  src={viz.image} alt={viz.short_title+' Image'} className="img-fluid img-thumbnail max-vh-25"></img>
+	      <p className="card-text text-body">{viz.caption}</p>
 	    </a>
 	  </div>
 	)})
