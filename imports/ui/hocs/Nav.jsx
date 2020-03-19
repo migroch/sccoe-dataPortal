@@ -166,6 +166,7 @@ class Nav extends Component {
   setActiveLink(target){
     history.pushState({}, '', $(target)[0].href);
     $('.nav-link').removeClass('active');
+    $('.nav-link').blur();
     $('.submenu').addClass('invisible');
     $(target).addClass('active');
     $(target).siblings().removeClass('invisible');
