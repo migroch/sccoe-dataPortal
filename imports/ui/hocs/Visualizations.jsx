@@ -122,11 +122,12 @@ class Visualizations extends Component {
   makeVizModal(selectedViz){
     let vizTitle = (selectedViz) ?  selectedViz.title : 'No viz selected';
     let vizUrl = (selectedViz) ? selectedViz.vizurl : null ;
+    let vizUrlRestricted =  (selectedViz) ? selectedViz.vizurl_restricted : null ;
     let vizOptions = (selectedViz) ? selectedViz.options : null ;
     let viz = null
     if (vizUrl){
       
-      viz = (<TableauViz vizId='VisualizationsModalViz' url={vizUrl} options={vizOptions} />)
+      viz = (<TableauViz vizId='VisualizationsModalViz' url={vizUrl} url_restricted={vizUrlRestricted} options={vizOptions} />)
     }
     
     return(

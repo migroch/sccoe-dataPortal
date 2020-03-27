@@ -74,6 +74,28 @@ export default visualizations_data = [
     	    }
     	]
     },
+     {
+    	category_key: 'CAST',
+    	category_title: 'California Science Test (CAST)',
+    	category_short_title: 'CAST',
+    	vizs:[
+    	    {
+    		key:"CAST",
+    		title:'California Science Test (CAST)',
+    		short_title:'CAST',
+    		caption: "Results from the 2019 California Science Test for Santa Cruz County districts and schools.",
+    		vizurl:"https://public.tableau.com/views/CAST_15853454266330/CASTDashboard",
+		vizurl_restricted: 'https://public.tableau.com/views/CAST_15853454266330/CASTDashboardRestricted',
+    		options:{
+    		    //"Governance":["State","County"],
+		    "Restricted": true,
+		    //"District_County_State":"(All)",
+
+    		},
+    		image:"CAST.png"
+    	    }
+    	]
+    },
     // {
     // 	category_key: 'MathMindset',
     // 	category_title: 'Math Mindset',

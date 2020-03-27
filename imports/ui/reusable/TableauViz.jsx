@@ -4,7 +4,7 @@
 import React, { Component } from 'react';
 import { withTracker } from 'meteor/react-meteor-data';
 import {tableau} from 'tableau-api';
-
+import permissions_data from '../../data/permissions_data.js';
 
 class TableauViz extends Component {
   constructor(props) {
@@ -25,7 +25,7 @@ class TableauViz extends Component {
     }
     
     return (
-  	<div className="ml-auto mr-auto" id={this.props.vizId} style={vizContainerStyle}></div>
+      <div className="ml-auto mr-auto" id={this.props.vizId} style={vizContainerStyle}></div>
     );
   }
 
@@ -47,11 +47,13 @@ class TableauViz extends Component {
     //this.setState({
     //  width: 0.9*window.innerWidth,
     //  height: window.innerHeight - $('.navbar').outerHeight(),
-   // });
+    // });
   }
   
   handleGovernance() {
     let user = this.props.user;
+    let url = this.props.url
+    let urlRestricted = this.props.url_restricted
     let viz = this.viz;
     let worksheets;
     
@@ -66,22 +68,65 @@ class TableauViz extends Component {
 	if (user && user.verified_email) {
 	  let userId = this.props.user._id;
 	  let roles = Roles.getRolesForUser(userId);
+	  let districts = roles.map((role)=>permissions_data[role]);
+	  
 	  if (roles.includes('All') || roles.includes('Admin')) {
-	    worksheets.forEach((sheet)=>{sheet.applyFilterAsync("Governance", "",  tableauSoftware.FilterUpdateType.ALL);})
+
+	    // Logged in with All/Admin privileges
+	    
+	    worksheets.forEach((sheet)=>{sheet.applyFilterAsync("Governance", "",  tableauSoftware.FilterUpdateType.ALL);});
+	    if (urlRestricted){
+	      viz.getWorkbook().changeParameterValueAsync("Restricted", false);
+	      viz.getWorkbook().activateSheetAsync( url.split("/").slice(-1)[0]);
+	      worksheets = viz.getWorkbook().getActiveSheet().getWorksheets();
+	      worksheets.forEach((sheet)=>{sheet.applyFilterAsync("District_County_State", ["California", "Santa Cruz County"],  tableauSoftware.FilterUpdateType.REPLACE);});
+	    }	      
 	  } else {
-	    worksheets.forEach((sheet)=>{sheet.applyFilterAsync("Governance", roles,  tableauSoftware.FilterUpdateType.ADD);})
+
+	    // Logged in with without full privileges
+	    
+	    worksheets.forEach((sheet)=>{sheet.applyFilterAsync("Governance", roles,  tableauSoftware.FilterUpdateType.ADD);});
+	    if (urlRestricted) {
+	      if (roles){
+		viz.getWorkbook().changeParameterValueAsync("Restricted", false);
+		viz.getWorkbook().activateSheetAsync( url.split("/").slice(-1)[0]);
+		worksheets = viz.getWorkbook().getActiveSheet().getWorksheets();
+		worksheets.forEach((sheet)=>{sheet.applyFilterAsync("Governance", "",  tableauSoftware.FilterUpdateType.ALL);});
+		worksheets.forEach((sheet)=>{sheet.applyFilterAsync("District_County_State", ["California", "Santa Cruz County"],  tableauSoftware.FilterUpdateType.REPLACE);});
+	      } else {
+		viz.workbook.changeParameterValueAsync("Restricted", true);
+		viz.getWorkbook().activateSheetAsync( urlRestricted.split("/").slice(-1)[0]);
+		worksheets = viz.getWorkbook().getActiveSheet().getWorksheets();	
+		worksheets.forEach((sheet)=>{sheet.applyFilterAsync("Governance", "",  tableauSoftware.FilterUpdateType.ALL);});
+		worksheets.forEach((sheet)=>{sheet.applyFilterAsync("District_County_State", "",  tableauSoftware.FilterUpdateType.ALL);});
+		}
+	    }
 	  }
 	} else {
-	  worksheets.forEach((sheet)=>{sheet.applyFilterAsync("Governance", ["State", "County"],  tableauSoftware.FilterUpdateType.REPLACE);})
+
+	  // Not logged in
+
+	  worksheets.forEach((sheet)=>{sheet.applyFilterAsync("Governance", ["State", "County"],  tableauSoftware.FilterUpdateType.REPLACE);});
+	  if (urlRestricted){
+	    viz.getWorkbook().changeParameterValueAsync("Restricted", true);
+	    viz.getWorkbook().activateSheetAsync( urlRestricted.split("/").slice(-1)[0]);
+	    worksheets.forEach((sheet)=>{sheet.applyFilterAsync("Governance", "",  tableauSoftware.FilterUpdateType.ALL);});
+	    worksheets.forEach((sheet)=>{sheet.applyFilterAsync("District_County_State", "",  tableauSoftware.FilterUpdateType.ALL);});
+	  }   
 	}
       } catch (err) {
-	console.log("Viz not ready to handle user change");
+	console.log("From handleGovernance(): "+err);
       }
     }
   }
 
   componentDidMount(){
-    this.renderTableauViz(this.props.url);
+    if (this.props.url_restricted) {
+      this.renderTableauViz(this.props.url_restricted);
+    } else {
+      this.renderTableauViz(this.props.url);
+    }
+    
     $('.tab-vizItems').css("display","none");
     this.viz.addEventListener("parametervaluechange", this.handleGovernance)
     //this.updateDimensions();
