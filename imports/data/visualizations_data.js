@@ -9,81 +9,21 @@ export default visualizations_data = [
 	vizs:[
 	    {
 		key:"SCCAASPPDash",
-		title:'Santa Cruz CAASPP Dashboard',
+		title:'Santa Cruz CAASPP | 2015-2019',
 		short_title:'SC CAASPP',
-		caption: 'Explore CAASPP results for Santa Cruz County districts.',
+		caption: 'Explore CAASPP results for Santa Cruz County.',
 		vizurl:"https://public.tableau.com/views/SC_CAASPP_v2/SCCAASPPDashboard",
+		vizurl_restricted: "https://public.tableau.com/views/SC_CAASPP_v2/SCCAASPPDashboardRestricted",
 		options:{
-		    "Governance":["County"]
+		    "Governance":["County"],
 		},
 		image:"SCCAASPPDash.png"
-	    }
-	]
-    },
-    {
-	category_key: 'CHKS',
-	category_title: 'California Healthy Kids Survey (CHKS)',
-	category_short_title: 'CHKS',
-	vizs:[
-	    {
-		key:"CHKSSuicideDepression",
-		title:'Santa Cruz CHKS Suicide & Depression LGBTQ+ Dashboard',
-		short_title:'CHKS Suicide & Depression',
-		caption: "Compare reponses to the suicide and depression questions in the CHKS survey between self-identified LGBTQ+ and Non-LGBTQ+ students.",
-		vizurl:"https://public.tableau.com/views/SIBHIcharts/SuicideDepression_Dashboard",
-		options:{},
-		image:"SuicideIdeationLGBTQDash.png"
 	    },
-	    {
-		key:"CHKSIndicators",
-		title:'Santa Cruz CHKS Indicators Dashboard',
-		short_title:'Explore the responses from Santa Cruz County students to the CHKS survey across years, with the ability to group and compare based on demographic information',
-		caption: 'Browse the student responses to the CHKS survey questions and idicators across time.',
-		vizurl:"https://public.tableau.com/views/ChksTrends_v0_1/IndicatorsDashboard",
-		options:{
-		     "Governance":["County"]
-		},
-		image:"CHKSIndicatorsDash.png"
-	    },
-	    {
-		key:"CHKSDemographics",
-		title:'Santa Cruz CHKS Demographics Dashboard',
-		short_title:'CHKS Demographics',
-		caption: "Explore the demographic information of students that have taken the CHKS survey in Santa Cruz County.",
-		vizurl:"https://public.tableau.com/views/ChksTrends_v0_1/DemographicsDashboard",
-		options:{},
-		image:"CHKSDemographicsDash.png"
-	    }   
-	]
-    },
-    {
-    	category_key: 'ELPAC-ELPI',
-    	category_title: 'English Language Proficiency Assessments for California (ELPAC)',
-    	category_short_title: 'ELPAC/ELPI',
-    	vizs:[
-    	    {
-    		key:"ELPI",
-    		title:'English Learner Progress Indicator (ELPI) - Current Status',
-    		short_title:'ELPI Status',
-    		caption: "Look at the English learners progress status in Santa Cruz County districts and schools based on the ELPAC's English Learner Progress Indicator (ELPI).",
-    		vizurl:"https://public.tableau.com/views/ELPI/ELPICurrentStatus",
-    		options:{
-    		    "Governance":["State","County"]
-    		},
-    		image:"ELPIDash.png"
-    	    }
-    	]
-    },
-     {
-    	category_key: 'CAST',
-    	category_title: 'California Science Test (CAST)',
-    	category_short_title: 'CAST',
-    	vizs:[
-    	    {
+	     {
     		key:"CAST",
-    		title:'California Science Test (CAST)',
+    		title:'California Science Test (CAST) | 2019',
     		short_title:'CAST',
-    		caption: "Results from the 2019 California Science Test for Santa Cruz County districts and schools.",
+    		caption: "See the results from the first California Science Test in 2019.",
     		vizurl:"https://public.tableau.com/views/CAST_15853454266330/CASTDashboard",
 		vizurl_restricted: 'https://public.tableau.com/views/CAST_15853454266330/CASTDashboardRestricted',
     		options:{
@@ -94,8 +34,66 @@ export default visualizations_data = [
     		},
     		image:"CAST.png"
     	    }
+	]
+    },
+     {
+    	category_key: 'ELPAC-ELPI',
+    	category_title: 'English Language Proficiency Assessments for California (ELPAC)',
+    	category_short_title: 'ELPAC/ELPI',
+    	vizs:[
+    	    {
+    		key:"ELPI",
+    		title:'English Learner Progress Indicator (ELPI) - Current Status',
+    		short_title:'ELPI Status',
+    		caption: "Look at the English Learners Progress status in Santa Cruz County districts and schools.",
+    		vizurl:"https://public.tableau.com/views/ELPI/ELPICurrentStatus",
+		vizurl_restricted: "https://public.tableau.com/views/ELPI/ELPICurrentStatusRestricted",
+    		options:{
+    		     //"Governance":["State","County"],
+		     "Restricted": true,
+    		},
+    		image:"ELPIDash.png"
+    	    }
     	]
     },
+    {
+	category_key: 'CHKS',
+	category_title: 'California Healthy Kids Survey (CHKS)',
+	category_short_title: 'CHKS',
+	vizs:[
+	    {
+		key:"CHKSSuicideDepression",
+		title:'Santa Cruz CHKS Suicide & Depression LGBTQ+ Dashboard',
+		short_title:'CHKS Suicide & Depression',
+		caption: "See the reponses to the suicide and depression questions in the CHKS survey, from LGBT and Non-LGBT students.",
+		vizurl:"https://public.tableau.com/views/SIBHIcharts/SuicideDepression_Dashboard",
+		options:{},
+		image:"SuicideIdeationLGBTQDash.png"
+	    },
+	    {
+		key:"CHKSIndicators",
+		title:'Santa Cruz CHKS Indicators Dashboard | 2015-2019',
+		short_title:'Explore the responses to all the questions and indicators in the CHKS survey across years.',
+		caption: 'Browse the student responses to the CHKS survey questions and idicators across time.',
+		vizurl:"https://public.tableau.com/views/ChksTrends_v0_1/IndicatorsDashboard",
+		options:{
+		     "Governance":["County"]
+		},
+		image:"CHKSIndicatorsDash.png"
+	    },
+	    {
+		key:"CHKSDemographics",
+		title:'Santa Cruz CHKS Demographics Dashboard | 2015-2019',
+		short_title:'CHKS Demographics',
+		caption: "Demographic information of students that have taken the CHKS survey in Santa Cruz County.",
+		vizurl:"https://public.tableau.com/views/ChksTrends_v0_1/DemographicsDashboard",
+		options:{},
+		image:"CHKSDemographicsDash.png"
+	    }   
+	]
+    },
+   
+     
     // {
     // 	category_key: 'MathMindset',
     // 	category_title: 'Math Mindset',

@@ -47,10 +47,10 @@ class Visualizations extends Component {
       return (
 	<div id="Visualizations" className="scrollspy container-fluid pt-2 bg-light" style={containerStyle}>
 	  <div className="container-fluid bg-light pb-2">
-	    <h2 className="m-auto text-primary text-center">Visualizations</h2>
-	    <h5 className="">Below you can find a set of dashboards and charts that we have created to explore education related datasets for Santa Cruz County and its school districts.</h5>
+	    <h2 className="m-auto text-primary text-center pt-5">Visualizations</h2>
+	    <h5 className="pb-2 pt-2 text-center">Dashboards and charts created to explore education related datasets for Santa Cruz County.</h5>
 	  </div>
-	  <div className='row'>
+	  <div className='row d-flex justify-content-center'>
 	    {this.makeCategoryList(visualizations)}
 	  </div>
 	  {this.makeVizModal(this.state.selectedViz)}
@@ -87,8 +87,9 @@ class Visualizations extends Component {
 	  <div key={index} className={"card pb-3 text-wrap mh-25 max-vh-25 col-md-"+colsize}>
 	    <a href="" id={viz.key+"Button"} role="button" onClick={this.openViz} data-vizkey={viz.key} data-toggle="modal" data-target="#vizModal">
 	      <h6 className="card-title text-center pt-3">{viz.title}</h6>
+	      <p className="card-text text-body text-center">{viz.caption}</p>
 	      <img  src={viz.image} alt={viz.short_title+' Image'} className="img-fluid img-thumbnail max-vh-25"></img>
-	      <p className="card-text text-body">{viz.caption}</p>
+	      
 	    </a>
 	  </div>
 	)})

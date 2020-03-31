@@ -45,9 +45,9 @@ class Reports extends Component {
       return (
 	<div id="Reports" className="scrollspy container-fluid pt-2" style={containerStyle}>
 	  <div className="container-fluid  pb-2">
-	    <div className="m-auto  pb-1">
-	      <h2 className=" text-primary text-center">Reports</h2>
-	      <h5 className="">The reports below are visualization layouts and infographics designed with printing purposes in mind.</h5>
+	    <div className="m-auto">
+	      <h2 className=" text-primary text-center pt-5">Reports</h2>
+	      <h5 className="pb-2 pt-2 text-center">Viisualization layouts designed for printing.</h5>
 	    </div>
 	    <div className='row'>
 	      {this.makeReportsList(reports)}
@@ -78,7 +78,7 @@ class Reports extends Component {
 	<img src={report.image} alt={report.short_title+" Image"} className="mr-3 img-fluid" width="20%"></img>
 	<div className="media-body mt-auto mb-auto">
 	  <h5 className="mt-0">{report.title}</h5>
-	  <p dangerouslySetInnerHTML={{ __html: report.caption }}></p>
+	  <p className="text-justify mr-3" dangerouslySetInnerHTML={{ __html: report.caption }}></p>
 	  <button className="btn btn-primary ml-auto mr-auto" data-report={report.key} onClick={this.openReport}>Open Report</button>
 	</div>
       </div>
@@ -90,7 +90,7 @@ class Reports extends Component {
       <div  id={report.key} key={index} className="container-fluid pt-2 pb-2 bg-light scrollspy ml-2 mr-3">
 	<button type="button"  className="close"  aria-label="Close" onClick={this.closeReport}> <span aria-hidden="true">&times;</span></button>
 	<h3 className="">{report.title}</h3>
-	<p dangerouslySetInnerHTML={{ __html: report.caption }}></p>
+	<p className="text-justify" dangerouslySetInnerHTML={{ __html: report.caption }}></p>
 	<ol>
 	  <li><p className="mb-0">Select a school or district to to compare against county results. <span className="text-danger">Reports showing district data are available after login with a district domain email or another authorized email</span>.</p>
 	    <div className="d-flex p-2 container justify-content-center">

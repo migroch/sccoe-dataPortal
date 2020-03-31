@@ -119,8 +119,9 @@ class HighLights extends Component {
 	let vizOptions = hilight.options;
 
 	return(
-	  <div key={index} className={"carousel-item w-100 h-100 "+active} data-interval="10000" onClick={this.switchToDashboard}>
-	    <button id={"exploreMore"+hilight.key} className="btn btn-primary btn-sm text-center text-wrap" style={exploreMoreStyle} data-vizkey={hilight.key} data-fulldashkey={hilight.full_dashboard_key} data-toggle="tooltip" data-placement="top"  title="Explore the full dashboard" onClick={this.switchToDashboard}><span><ArrowForward size="30"/></span></button>
+	  <div key={index} className={"carousel-item w-100 h-100 "+active} data-interval="20000" data-vizkey={hilight.key} data-fulldashbutton={hilight.full_dashboard_button} data-fulldashlink={hilight.full_dashboard_link} onClick={this.switchToDashboard} onmouseover={this.pauseCarousel}>
+	    
+	    <button id={"exploreMore"+hilight.key} className="btn btn-primary btn-sm text-center text-wrap" style={exploreMoreStyle}  data-toggle="tooltip" data-placement="top"  title="Click to open the full dashboard"><span><ArrowForward size="30"/></span></button>
 
 	    <TableauViz vizId={hilight.key} url={hilight.vizurl} options={hilight.options} />
 
@@ -138,12 +139,17 @@ class HighLights extends Component {
     $('#HighlightsCarousel').carousel('pause');
     this.setState({carouselState:'pause'});
     let target = event.currentTarget;
+    console.log(target)
     let vizKey = $(target).data('vizkey');
-    let fulldashKey = $(target).data('fulldashkey');
-    let vizs = tableauSoftware.VizManager.getVizs();
-    let viz = vizs.find((viz) => viz.getParentElement().id == vizKey);
-    if (viz) viz.getWorkbook().activateSheetAsync(fulldashKey);
-    $('#exploreMore'+vizKey).hide();
+    let fulldashButton = $(target).data('fulldashbutton');
+    let fulldashLink = $(target).data('fulldashlink');
+    document.getElementById(fulldashLink).click();
+    document.getElementById(fulldashButton).click();
+    
+    /* let vizs = tableauSoftware.VizManager.getVizs();
+       let viz = vizs.find((viz) => viz.getParentElement().id == vizKey);
+       if (viz) viz.getWorkbook().activateSheetAsync(fulldashKey);
+       $('#exploreMore'+vizKey).hide(); */
   }
   
   makeCarouselIndicators(highlights){
@@ -172,12 +178,14 @@ class HighLights extends Component {
   }
 
   pauseCarousel(event){
+    console.log('carousel paused')
     event.preventDefault()
     $('#HighlightsCarousel').carousel('pause');
     this.setState({carouselState:'pause'});
   }
 
   playCarousel(event){
+    console.log('carousel started')
     event.preventDefault()
     $('#HighlightsCarousel').carousel('next');
     this.setState({carouselState:'play'});
@@ -200,7 +208,7 @@ class HighLights extends Component {
     if (!this.props.loading){
       if (this.state.carouselState=='play'){
 	$('#HighlightsCarousel').carousel({
-	  interval:10000
+	  interval:20000
 	});
       }
       

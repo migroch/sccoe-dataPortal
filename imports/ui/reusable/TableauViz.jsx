@@ -87,7 +87,7 @@ class TableauViz extends Component {
 	    
 	    worksheets.forEach((sheet)=>{sheet.applyFilterAsync("Governance", roles,  tableauSoftware.FilterUpdateType.ADD);});
 	    if (urlRestricted) {
-	      if (roles){
+	      if (roles.length){
 		viz.getWorkbook().changeParameterValueAsync("Restricted", false);
 		viz.getWorkbook().activateSheetAsync( url.split("/").slice(-1)[0]);
 		worksheets = viz.getWorkbook().getActiveSheet().getWorksheets();

@@ -88,7 +88,7 @@ class Nav extends Component {
 	      </ul> 
 	      
 	      {/*Right Menu*/}
-	      <ul className="navbar-nav ml-auto ">
+	      <ul className="navbar-nav ml-auto">
 		{signIO}
 	      </ul>
 	    </div>
@@ -107,7 +107,10 @@ class Nav extends Component {
 	let active = (index == 0) ? 'active' : ''
 	let invisible = (index == 0) ? '' : 'invisible'
 	let Link
-	if(['Highlights', 'About', 'Visualizations', 'Reports'].includes(item.key)){
+	if(item.externalLink){
+	  Link = (<a href={item.externalLink} id={item.key+'Link'} className={"nav-link "} target="_blank">{item.title}</a>)
+	}
+	else if(['Highlights', 'About', 'Visualizations', 'Reports'].includes(item.key)){
 	  Link = (<a href={"#"+item.key} id={item.key+'Link'} className={"nav-link "+active}  onClick={this.handleLinkClick}>{item.title}</a>)
 	} else {
 	  Link = (<a type="button" href={"#"+item.key} id={item.key+'Link'} className={"nav-link "+active}  onClick={this.handleLinkClick} data-toggle="tooltip" data-placement="right" title="Coming soon!">{item.title}</a>)
@@ -205,13 +208,13 @@ class Nav extends Component {
       $('#closeLoginModal').click();
       let email;
       if (user.verified_email){
-	email = <p className="m-0 text-info">{user.email} (Verified)</p>
+	email = <p className="m-0 text-success">{user.email} (Verified)</p>
       } else {
 	email = <p className="m-0 text-danger">{user.email} (Not verified)</p>
       }
       let roles = Roles.getRolesForUser(user._id);
       if (roles.includes('All')) roles = ['All'];
-      let roleList = roles.map((role, index)=><li key={index} className="list-inline-item text-info">{role}</li>)
+      let roleList = roles.map((role, index)=><li key={index} className="list-inline-item text-success">{role}</li>)
       return(	
 	     <li className="nav-item" style={{"width":"10em"}}>
 	  
@@ -229,10 +232,10 @@ class Nav extends Component {
 		   <p className="m-0">Permissions:</p>
 		   <ul className="list-inline">{roleList}</ul>
 		 </div>
-		 <button id="signIOButton"  className="btn text-primary px-2 text-center" onClick={AccountsTemplates.logout}>
+		 <a href="" id="signIOButton" role="button" className="btn  px-2 text-center dropdown-item" onClick={AccountsTemplates.logout}>
 		   <span className="p-0 m-0">Sign Out </span>
 		   <LogOut size="30" />
-		 </button>
+		 </a>
 	       </div>
 	       
 	     </li> 

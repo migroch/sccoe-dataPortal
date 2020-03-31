@@ -28,8 +28,11 @@ class About extends Component {
 	  </p>
 
 	  <div className="container text-center">
-	    <a role="button" className="btn btn-primary" href="mailto:data@santacruzcoe.org">
-	      Send us an email! | data@santacruzcoe.org
+	    <a role="button" className="btn btn-primary m-3" href="mailto:data@santacruzcoe.org">
+	      Send us an email!
+	    </a>
+	    <a role="button" className="btn btn-info m-3" href="https://forms.gle/pCqNLSSZyE6LDehVA" target="_blank">
+	      Submit a data request!
 	    </a>
 	  </div>
 

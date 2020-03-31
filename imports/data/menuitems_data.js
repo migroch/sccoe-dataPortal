@@ -31,17 +31,24 @@ export default menuitems_data = [
 	submenu_items:get_reports_short_titles(reports_data)
     },
     {
-	key:'DataSets',
-	title:'Data Sets',
-	route:'/datasets',
-	submenu_items:[]
-     },
-    {
-	key:'DataLiteracy',
-	title:'Data Literacy',
-	route:'/data101',
-	submenu_items:[]
+	key: 'DataRequest',
+	title: 'Data Request Ticket',
+	route:'',
+	externalLink: 'https://forms.gle/pCqNLSSZyE6LDehVA',
+	submenu_items:[],
     }
+    // {
+    // 	key:'DataSets',
+    // 	title:'Data Sets',
+    // 	route:'/datasets',
+    // 	submenu_items:[]
+    //  },
+    // {
+    // 	key:'DataLiteracy',
+    // 	title:'Data Literacy',
+    // 	route:'/data101',
+    // 	submenu_items:[]
+    // }
 ];
 
 function get_highlights_short_titles(highlights_data) {

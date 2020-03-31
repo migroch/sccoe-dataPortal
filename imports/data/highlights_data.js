@@ -11,7 +11,8 @@ export default highlights_data = [
 	options:{
 	    "Governance":["County"]
 	},
-	full_dashboard_key:"SC CAASPP Dashboard",
+	full_dashboard_button:"SCCAASPPDashButton",
+	full_dashboard_link:"CAASPPLink",
 	full_dashboard_name:"Santa Cruz CAASPP Dashboard"
     },
     {
@@ -24,7 +25,8 @@ export default highlights_data = [
 	    "DepressionSuicideSwap_Parameter":"Suicide"
 //	    "DepressionSuicideSwap_Parameter":"In the past 12 months, did you seriuously consider attempting suicide? (% that responded YES)"
 	},
-	full_dashboard_key:"SuicideDepression_Dashboard",
+	full_dashboard_button:"CHKSSuicideDepressionButton",
+	full_dashboard_link:"CHKSLink",
 	full_dashboard_name:"Suicide & Depression LGBTQ+ Dashboard"
     },
     {
@@ -37,8 +39,9 @@ export default highlights_data = [
 	    "DepressionSuicideSwap_Parameter":"Depression"
 //	    "DepressionSuicideSwap_Parameter":"Past 12 Months, did you ever feel so sad or hopeless almost every day? (% that responded YES)"
 	},
-	full_dashboard_key:"SuicideDepression_Dashboard",
-	full_dashboard_name:"Suicide & Depression LGBTQ+ Dashboard",
+	full_dashboard_button:"CHKSSuicideDepressionButton",
+	full_dashboard_link:"CHKSLink",
+	full_dashboard_name:"Suicide & Depression LGBTQ+ Dashboard"
     },
     
     // {
