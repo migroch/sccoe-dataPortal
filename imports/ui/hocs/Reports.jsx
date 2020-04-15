@@ -47,7 +47,7 @@ class Reports extends Component {
 	  <div className="container-fluid  pb-2">
 	    <div className="m-auto">
 	      <h2 className=" text-primary text-center pt-5">Reports</h2>
-	      <h5 className="pb-2 pt-2 text-center">Viisualization layouts designed for printing.</h5>
+	      <h5 className="pb-2 pt-2 text-center">Visualization layouts designed for printing.</h5>
 	    </div>
 	    <div className='row'>
 	      {this.makeReportsList(reports)}

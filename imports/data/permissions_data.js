@@ -13,6 +13,7 @@ export default permissions_data =  {
 	    'fsabbah@santacruzcoe.org', 
 	    'robdarrow@robdarrow.us',
 	    'ssorensen@santacruzcoe.org',
+	    'jmcrae@santacruzcoe.org',
 	    'dbodenheimer@santacruzcoe.org',
 	    'cchopra@santacruzcoe.org'],
 	domains: []
