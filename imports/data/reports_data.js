@@ -2,6 +2,27 @@
 // Initial reports data
 
 export default reports_data = [
+        {
+	key:"CHKS",
+	title:"Santa Cruz CHKS Overview | 2015-2019",
+	short_title:"CHKS Overview",
+	caption:"This report is a descriptive overview of a selected set of questions and indicators from the California Healthy Kids Surveys (CHKS) administered in Santa Cruz County from 2015 to 2019. The CHKS is an anonymous assessment that students in Santa Cruz County schools take every other year. For traditional schools the survey is taken during grades 7th, 9th and 11th. The report includes countywide results as well as per district inserts." ,
+	fileList:{
+	    "Santa Cruz CHKS": "CHKSoverviewReport/Santa Cruz CHKS.pdf",
+	    "Santa Cruz CHKS (Booklet Version)": "CHKSoverviewReport/Santa Cruz CHKS (Booklet).pdf",
+	    "Live Oak Insert": "CHKSoverviewReport/Live Oak Insert.pdf",
+	    "Pajaro Valley Insert": "CHKSoverviewReport/Pajaro Valley Insert.pdf",
+	    "San Lorenzo Valley Insert": "CHKSoverviewReport/San Lorenzo Valley Insert.pdf",
+	    "Santa Cruz City Insert":"CHKSoverviewReport/Santa Cruz City Insert.pdf",
+	    "Santa Cruz COE Insert": "CHKSoverviewReport/Santa Cruz COE Insert.pdf",
+	    "Scotts Valley Insert": "CHKSoverviewReport/Scotts Valley Insert.pdf",
+	    "Soquel Insert": "CHKSoverviewReport/Soquel Insert.pdf"
+	},
+	options:{
+	},
+	size:{"width":1275, "height": 1710},
+	image:"CHKSoverviewReport/Santa Cruz CHKS cover.png"
+    },
     {
 	key:"CHKSLGBT",
 	title:"CHKS LGBT Report",

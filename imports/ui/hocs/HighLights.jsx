@@ -119,7 +119,7 @@ class HighLights extends Component {
 	let vizOptions = hilight.options;
 
 	return(
-	  <div key={index} className={"carousel-item w-100 h-100 "+active} data-interval="20000" data-vizkey={hilight.key} data-fulldashbutton={hilight.full_dashboard_button} data-fulldashlink={hilight.full_dashboard_link} onClick={this.switchToDashboard} onmouseover={this.pauseCarousel}>
+	  <div key={index} className={"carousel-item w-100 h-100 "+active} data-interval="20000" data-vizkey={hilight.key} data-fulldashbutton={hilight.full_dashboard_button} data-fulldashlink={hilight.full_dashboard_link} onClick={this.switchToDashboard} onMouseOver={this.pauseCarousel}>
 	    
 	    <button id={"exploreMore"+hilight.key} className="btn btn-primary btn-sm text-center text-wrap" style={exploreMoreStyle}  data-toggle="tooltip" data-placement="top"  title="Click to open the full dashboard"><span><ArrowForward size="30"/></span></button>
 

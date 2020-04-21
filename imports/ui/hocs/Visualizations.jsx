@@ -48,7 +48,7 @@ class Visualizations extends Component {
 	<div id="Visualizations" className="scrollspy container-fluid pt-2 bg-light" style={containerStyle}>
 	  <div className="container-fluid bg-light pb-2">
 	    <h2 className="m-auto text-primary text-center pt-5">Visualizations</h2>
-	    <h5 className="pb-2 pt-2 text-center">Dashboards and charts created to explore education related datasets for Santa Cruz County.</h5>
+	    {/* <h5 className="pb-2 pt-2 text-center">Dashboards and charts created to explore education related datasets for Santa Cruz County.</h5> */}
 	  </div>
 	  <div className='row d-flex justify-content-center'>
 	    {this.makeCategoryList(visualizations)}

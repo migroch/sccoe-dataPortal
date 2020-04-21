@@ -208,19 +208,20 @@ class Nav extends Component {
       $('#closeLoginModal').click();
       let email;
       if (user.verified_email){
-	email = <p className="m-0 text-success">{user.email} (Verified)</p>
+	email = <p className="m-0" style={{"color":"#00a6a3"}}>{user.email} (Verified)</p>
       } else {
 	email = <p className="m-0 text-danger">{user.email} (Not verified)</p>
       }
       let roles = Roles.getRolesForUser(user._id);
       if (roles.includes('All')) roles = ['All'];
-      let roleList = roles.map((role, index)=><li key={index} className="list-inline-item text-success">{role}</li>)
+      let roleList = roles.map((role, index)=><li key={index} className="list-inline-item"  style={{"color":"#00a6a3"}}>{role}</li>)
       return(	
 	     <li className="nav-item" style={{"width":"10em"}}>
 	  
-	       <a href="#" role="button" id="ProfileButton" className="nav-link dropdown-toggle text-center align-middle p-0 m-0 d-table ml-auto" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	       <a href="#" role="button" id="ProfileButton" className="nav-link dropdown-toggle text-center d-table align-middle p-0 m-0 ml-auto" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 		 <User size="50"/>
-		 <p className="m-0 p-0">{user.profile.name}</p>
+		 <br />
+		 {user.profile.name}
 	       </a>
 
 	       <div className="dropdown-menu dropdown-menu-right" aria-labelledby="ProfileButton">

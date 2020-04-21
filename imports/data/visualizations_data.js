@@ -43,7 +43,7 @@ export default visualizations_data = [
     	vizs:[
     	    {
     		key:"ELPI",
-    		title:'English Learner Progress Indicator (ELPI) - Current Status',
+    		title:'English Learner Progress Indicator (ELPI) Current Status | 2019',
     		short_title:'ELPI Status',
     		caption: "Look at the English Learners Progress status in Santa Cruz County districts and schools.",
     		vizurl:"https://public.tableau.com/views/ELPI/ELPICurrentStatus",

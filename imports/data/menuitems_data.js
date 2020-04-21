@@ -32,7 +32,7 @@ export default menuitems_data = [
     },
     {
 	key: 'DataRequest',
-	title: 'Data Request Ticket',
+	title: 'Request Ticket',
 	route:'',
 	externalLink: 'https://forms.gle/pCqNLSSZyE6LDehVA',
 	submenu_items:[],
